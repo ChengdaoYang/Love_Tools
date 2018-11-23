@@ -1,4 +1,4 @@
-mport requests
+import requests
 import re
 from bs4 import BeautifulSoup
 url = 'https://www.thehindubusinessline.com/'
