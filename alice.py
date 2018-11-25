@@ -45,7 +45,24 @@ def website7():
             data.append((container_title,container_link,text))
 
     return(data)
+# website 19
+def website19()
+    data = []
+    for container in containers.find_all("article",{"class":"topnews__story"}):
+        container_title = container.text
+        container_title = ' '.join(container_title.split())
+        container_link = 'https://www.bloombergquint.com/' + container.a['href']
 
+        response = requests.get(container_link)
+        page = BeautifulSoup(response.content,'lxml')
+        paragraphs = page.find_all("p")
+        text = ""
+        for paragraph in paragraphs:
+            text += paragraph.text
+
+        data.append((container_title,container_link,text))
+        
+    return(data)
 
 
 
