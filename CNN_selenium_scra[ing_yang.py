@@ -8,15 +8,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC 
 from selenium.common.exceptions import TimeoutException
+from selenium.web_driver.chrome.options import Options
 
-url = 'https://www.cnn.com/search/?size=10&q=Apple&category=business'
+#links & vars
+name = 'Apple'
+url = f'https://www.cnn.com/search/?size=10&q={name}&category=business'
 
 
-driver = webdriver.Chrome()
-driver.implicitly_wait(1)
+#set chrome driver to headerless
+option_ = Options()
+option_.add_argument('--headless')
+
+#create driver to scrape
+driver = webdriver.Chrome(chrome_options=option_)
+driver.implicitly_wait(0.01)
 driver.get(url)
 
-# Wait 20 seconds for page to load
+# Wait 300 seconds for page to load the need elements
 timeout = 300
 try:
     WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//h3[@class='cnn-search__result-headline']")))
@@ -25,29 +33,76 @@ except TimeoutException:
     driver.quit()
 
 
-# find_elements_by_xpath returns an array of selenium objects.
-titles_element = driver.find_elements_by_tag_name("h3")
-
+# find_elements_by_xpath/or _by_tag_name returns an array of selenium objects.
+h3_elements = driver.find_elements_by_tag_name("h3")
 #find a tag with h3 tag
+
+#get links from a_tag uneder h3 tags
 list_links = []
-for h3_element in titles_element:
+for h3_element in h3_elements:
     list_links.append(h3_element.find_element_by_tag_name("a").get_attribute('href'))
-# use list comprehension to get the actual repo titles and not the selenium objects.
-#titles = [x.text for x in titles_element]
 
-# print out all the titles.
-print('titles:')
-#print(titles, '\n')
+#get article title
+link_title_lists = [x.text for x in h3_elements]
 
+#write out links to txt files
 #with open('titles.txt', 'w') as fp:
-#    for link in list_links:
+#    for i,link in enumerate(list_links):
+#        fp.write(link_title_lists[i])
+#        fp.write(':\n')
 #        fp.write(str(link))
 #        fp.write('\n')
+
+#close web_driver
+driver.quit()
+
+#use request here for performence ot practice selenium
+#pratice selenium + multiprocess
+
+def get_articles(liset_links):
+
+    #failure list
+    list_fail_link = []
+    #article text
+    text = ''
+
+    #get articles from the list_links
+    for i_link in list_links:
+        #set chrome driver to headerless
+        option_ = Options()
+        option_.add_argument('--headless')
+        
+        #create driver to scrape
+        driver = webdriver.Chrome(chrome_options=option_)
+        driver.get(link)
+        
+        # Wait 12 seconds for page to load the need elements
+        timeout = 12
+        try:
+            WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//h3[@class='cnn-search__result-headline']")))
+        except TimeoutException:
+            print('Timed out waiting for page to load')
+            list_fail_link.append(link)
+            driver.quit()
+    
+        p_elements = driver.find_element_by_xpath("//p[@class='']")
+        #get article and coleect all into var:text
+        for p_element in p_elements:
+            text.join(p_element.text)
+        
+        #clease driver
+        driver.quit()
+    return text, list_fail_link
+    
+
+
+#selenium click button 的方法
 # [Fort Hays State University] link的按钮的 javascript element search
 #python_button = driver.find_element_by_id('/.a/bundles/cnn-header.421e289332a74a2f369f-first-bundle.js') #FHSU
 #python_button.click()
 
 
+#用来看网站的 原代码 看看
 #response = requests.get(url)
 #print(response)
 #Soup = BeautifulSoup(response.content, 'lxml')
