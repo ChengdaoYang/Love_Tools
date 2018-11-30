@@ -56,3 +56,4 @@ for url in url_list:
 #         print(tag.get_text())
         text = text + (tag.get_text())
 print('text')
+print('good')
