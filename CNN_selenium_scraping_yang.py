@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC 
 from selenium.common.exceptions import TimeoutException
-from selenium.web_driver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options
 
 #links & vars
 name = 'Apple'
@@ -36,14 +36,18 @@ except TimeoutException:
 # find_elements_by_xpath/or _by_tag_name returns an array of selenium objects.
 h3_elements = driver.find_elements_by_tag_name("h3")
 #find a tag with h3 tag
+print(h3_elements)
 
 #get links from a_tag uneder h3 tags
 list_links = []
 for h3_element in h3_elements:
-    list_links.append(h3_element.find_element_by_tag_name("a").get_attribute('href'))
+    try:
+        list_links.append(h3_element.find_element_by_tag_name("a").get_attribute('href'))
+    except:
+        continue
 
 #get article title
-link_title_lists = [x.text for x in h3_elements]
+#link_title_lists = [x.text for x in h3_elements]
 
 #write out links to txt files
 #with open('titles.txt', 'w') as fp:
@@ -59,7 +63,7 @@ driver.quit()
 #use request here for performence ot practice selenium
 #pratice selenium + multiprocess
 
-def get_articles(liset_links):
+def get_articles(list_links):
 
     #failure list
     list_fail_link = []
@@ -74,28 +78,29 @@ def get_articles(liset_links):
         
         #create driver to scrape
         driver = webdriver.Chrome(chrome_options=option_)
-        driver.get(link)
+        driver.get(i_link)
         
-        # Wait 12 seconds for page to load the need elements
-        timeout = 12
+        # Wait x seconds for page to load the need elements
+        timeout = 8
         try:
-            WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//h3[@class='cnn-search__result-headline']")))
+            WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='zn-body__paragraph']")))
         except TimeoutException:
             print('Timed out waiting for page to load')
-            list_fail_link.append(link)
+            list_fail_link.append(i_link)
             driver.quit()
     
-        p_elements = driver.find_element_by_xpath("//p[@class='']")
+        p_elements = driver.find_elements_by_class_name("zn-body__paragraph")
         #get article and coleect all into var:text
         for p_element in p_elements:
-            text.join(p_element.text)
+            text = text + str(p_element.text)
         
         #clease driver
         driver.quit()
-    return text, list_fail_link
+    return text
     
 
-
+with open('result.txt', 'w') as fp:
+    fp.write(get_articles(list_links))
 #selenium click button 的方法
 # [Fort Hays State University] link的按钮的 javascript element search
 #python_button = driver.find_element_by_id('/.a/bundles/cnn-header.421e289332a74a2f369f-first-bundle.js') #FHSU
