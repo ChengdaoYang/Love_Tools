@@ -1,15 +1,9 @@
 import requests
 import datetime
-import parser
-import re
 from bs4 import BeautifulSoup
 
-# get _url function
-def get_url(name = 'apple', page = '1'):
-    base_url  = f'http://fortune.com/search?q={name}&page={page}'
-    return base_url
 
-def web2():
+def web2(keyword = 'Apple'):
 
     def get_old_day():
         now = datetime.datetime.now()
@@ -17,17 +11,10 @@ def web2():
         old_day = now - date_delta
         return old_day
 
-    old_day = get_old_day()
-
-    def get_url(name='apple', page='1'):
-        base_url = f'http://fortune.com/search?q={name}&page={page}'
+    def get_url(keyword = keyword, page='1'):
+        base_url = f'http://fortune.com/search?q={keyword}&page={page}'
         return base_url
 
-    url = get_url()
-    # response = requests.get(url)
-    # results_page = BeautifulSoup(response.content)
-    # search_word = search_pages[0].get('href')[:-1]
-    # aaa=112
     def find_in_one_page(url,j):
         response = requests.get(url)
         results_page = BeautifulSoup(response.content)
@@ -51,7 +38,7 @@ def web2():
                 continue
         return selected_links,j
 
-
+    old_day = get_old_day()
     j = 1
     all_links = []
     while j > 0:
@@ -73,8 +60,15 @@ def web2():
                 sentences_result.append(text)
         return sentences_result
 
-    all_text = []
+    all_text = ''
     for i in range(len(all_links)):
-        sen = get_content(all_links[i])
-        all_text.extend(sen)
+        sen = ''
+        one_content = get_content(all_links[i])
+        for j in range(len(one_content)):
+            sen = sen + one_content[j]
+        all_text = all_text + sen
+
     return all_text
+
+
+web2_result = web2(keyword = 'Google')
