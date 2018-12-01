@@ -6,7 +6,7 @@ def web_bloomberg(name, date_, out_put = False):
     
     text = ""
     for container in containers.find_all("li",{"class":"topic-page__item"}):
-#            title = container.h3.a.text
+
         link = "https://www.bloombergquint.com" + container.h3.a["href"]
         t = container.time["datetime"]
         delta = round((time.time() - float(t[:-3]))/86400,2)
@@ -19,5 +19,9 @@ def web_bloomberg(name, date_, out_put = False):
 
         for paragraph in paragraphs:
             text += paragraph.text
-          
+            
+    if out_put:
+        with open(f'{name}_bloomberg.txt', 'w', encoding="utf-8") as fp:
+            fp.write(text)
+            
     return text
