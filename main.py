@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from func_Yahoo import get_Yahoo
-
+from func_stock_price import get_stock_price
 
 
 class Company:
@@ -9,7 +9,7 @@ class Company:
     """Results are all based on Yahoo Finance."""
 
     #import webscraping function in the same folder
-    from func_Yahoo import get_Yahoo
+
 
     url_base = 'https://finance.yahoo.com/lookup?s='
 
@@ -17,6 +17,7 @@ class Company:
     def __init__(self,keyword):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
+
 
     #getter & setter
     @property
@@ -53,9 +54,24 @@ class Company:
     def news(self, day=7, out_put=False):
         text_ = ''
         text_ = get_Yahoo(self.ticker)
-        
+#        text_ = text_ + get_         
+#        text_ = text_ + get_
+#        text_ = text_ + get_
+#        text_ = text_ + get_
+#        text_ = text_ + get_
+#        text_ = text_ + get_
+#        text_ = text_ + get_
         return text_
 
+    def price(self, day=7, plot=False):
+        df =  get_stock_price(ticker=self.ticker, day=day)
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        if plot:
+            df['Close'].plot()
+            plt.show()
+        return df
 
 apple = Company('apple')
-print(apple.news())
+print(apple.price(plot=True))
+
