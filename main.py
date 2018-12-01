@@ -1,7 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
-from func_Yahoo import get_Yahoo
+
 from func_stock_price import get_stock_price
+
+from func_Arabian import get_
+from func_Bloomberg import get_
+from func_CNN import get_
+from func_ import get_
+from func_ import get_
+from func_ import get_
+from func_ import get_
+from func_ import get_
+from func_ import get_
+from func_ import get_
+
+AAPL_result.txt			func_CNN.py			func_Yahoo.py			list_of_web.ipynb
+CNN_selenium_scraping_yang.py	func_Eight_emotion.py		func_filter.py			main.py
+__pycache__			func_Financialex.py		func_pos_neg.py			module.txt
+func_Arabian.py			func_Fortune.py			func_stock_price.py
+func_Bloomberg.py		func_Nasdaq.py			func_word_cloud.py
 
 
 class Company:
@@ -14,10 +31,11 @@ class Company:
     url_base = 'https://finance.yahoo.com/lookup?s='
 
     #constructor
-    def __init__(self,keyword):
+    def __init__(self,keyword, monitor=False, warning=False):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
-
+        self.monitor = monitor
+        self.warning = warning
 
     #getter & setter
     @property
@@ -31,11 +49,33 @@ class Company:
     @property
     def ticker(self):
         return self._ticker
-    #
+    
     @ticker.setter
     def ticker(self,keyword):
         t = self.ticker(keyword)
         self._ticker = t
+
+#    @property
+#    def monitor(self):
+#        return self._monitor
+#    
+#    @monitor.setter
+#    def monitor(self,x):
+#        if x == True:
+#            
+#        self._monitor = x
+#    
+#    @property
+#    def warning(self):
+#        return self._warning
+#    
+#    @warning.setter
+#    def warning(self,x):
+#        if x == True:
+#            
+#        self._ticker = t
+#
+#    
 
     #class methods:
 
@@ -72,6 +112,9 @@ class Company:
             plt.show()
         return df
 
-apple = Company('apple')
-print(apple.price(plot=True))
 
+apple = Company('apple')
+print(apple.news())
+
+#print(apple.price(plot=True))
+#apple.price(day=30,plot=True)
