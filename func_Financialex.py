@@ -4,10 +4,10 @@
 
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+import datetime
 
 
-def website2(name, date_, out_put = False):
+def get_Financialex(name, date_, out_put = False):
     web2 = {}
     #for list in...
     #print(l)
@@ -33,9 +33,9 @@ def website2(name, date_, out_put = False):
                 if dd == '':  # filter the pages without a date
                     pass
                 else:
-                    date1 = datetime.strptime(dd, '%Y%m%d')
+                    date1 = datetime.datetime.strptime(dd, '%Y%m%d')
                     #print(date1)
-                    t1 = datetime.now() - date1
+                    t1 = datetime.datetime.now() - date1
                     t2 = t1.days
                     if t2 > date_:
                         pass
