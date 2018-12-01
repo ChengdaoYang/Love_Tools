@@ -8,7 +8,7 @@ n use: filter the txt file and return the sentences containing a specific compan
 '''
 import re
 list1 = ['Apple','AAPL']
-def filter(file_name, my_list):
+def get_filtered(file_name, my_list):
     f = open(file_name,'r')
     c = f.read()
     sentences = re.split(r' *[\.\?!][\'"\)\]]* *', c)
