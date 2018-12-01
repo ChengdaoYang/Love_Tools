@@ -16,11 +16,12 @@ url = f'https://www.cnn.com/search/?size=10&q={name}&category=business'
 
 
 #set chrome driver to headerless
-option_ = Options()
-option_.add_argument('--headless')
+#option_ = Options()
+#option_.add_argument('--headless')
 
 #create driver to scrape
-driver = webdriver.Chrome(chrome_options=option_)
+#driver = webdriver.Chrome(chrome_options=option_)
+driver = webdriver.Chrome()
 driver.implicitly_wait(0.01)
 driver.get(url)
 
