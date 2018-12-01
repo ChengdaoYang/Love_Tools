@@ -3,11 +3,11 @@ import datetime
 from bs4 import BeautifulSoup
 
 
-def get_Fortune(keyword = 'Apple'):
+def get_Fortune(keyword , date, out_put = False):
 
     def get_old_day():
         now = datetime.datetime.now()
-        date_delta = datetime.timedelta(days = 30)
+        date_delta = datetime.timedelta(days = date)
         old_day = now - date_delta
         return old_day
 
@@ -68,7 +68,8 @@ def get_Fortune(keyword = 'Apple'):
             sen = sen + one_content[j]
         all_text = all_text + sen
 
+    if out_put == True:
+    with open(f'{keyword}_Fortune.txt', 'w', encoding="utf-8") as fp:
+        fp.write(all_text)
+
     return all_text
-
-
-web2_result = get_Fortune(keyword = 'Google')
