@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-import requests
-from bs4 import BeautifulSoup
-import time
-
-
-
-def web_bloomberg(name):
-    dic = {}
+def web_bloomberg(name, date_, out_put = False):
+    
     url = "https://www.bloombergquint.com/search?q=" + name
     response = requests.get(url)
     containers = BeautifulSoup(response.content,'lxml')
@@ -17,17 +10,14 @@ def web_bloomberg(name):
         link = "https://www.bloombergquint.com" + container.h3.a["href"]
         t = container.time["datetime"]
         delta = round((time.time() - float(t[:-3]))/86400,2)
-        if delta > 31:
+        if delta > date_:
             break
         
         response = requests.get(link)
         page = BeautifulSoup(response.content,'lxml')
         paragraphs = page.find_all("p")
-#            text = ""
+
         for paragraph in paragraphs:
             text += paragraph.text
-#            data.append((title,link,delta,text))
-        
-    dic[name] = text    
-        
-    return dic
+          
+    return text

@@ -1,15 +1,5 @@
-# -*- coding: utf-8 -*-
-
-import requests
-from bs4 import BeautifulSoup
-import time
-import re
-import datetime
-
-
 #name = 'sbux'
-def web_nasdaq(name):
-    dic = {}
+def web_nasdaq(name，date, out_put = False):
     text = "" 
     count = 1
     flag = True
@@ -28,7 +18,7 @@ def web_nasdaq(name):
                 public_date = datetime.datetime.strptime(match[0], '%m/%d/%Y')
                 today = datetime.datetime.today()
                 delta = (today - public_date).days
-                if delta > 31:
+                if delta > date:
                     flag = False
                     break       
                 response = requests.get(link)
@@ -37,8 +27,8 @@ def web_nasdaq(name):
                 for paragraph in paragraphs:          
                     text += paragraph.text            
         count += 1                        
-        dic[name] = text       
-    return dic    
+      
+    return text   
 #webnasdaq(name)
                   
                 
