@@ -1,4 +1,4 @@
-def get_bloomberg(name, date_, out_put = False):
+def get_Bloomberg(name, date_, out_put = False):
     
     url = "https://www.bloombergquint.com/search?q=" + name
     response = requests.get(url)
