@@ -3,7 +3,7 @@ import datetime
 from bs4 import BeautifulSoup
 
 
-def web2(keyword = 'Apple'):
+def get_Fortune(keyword = 'Apple'):
 
     def get_old_day():
         now = datetime.datetime.now()
@@ -71,4 +71,4 @@ def web2(keyword = 'Apple'):
     return all_text
 
 
-web2_result = web2(keyword = 'Google')
+web2_result = get_Fortune(keyword = 'Google')
