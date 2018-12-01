@@ -9,6 +9,7 @@ class Company:
     """Results are all based on Yahoo Finance."""
 
     #import webscraping function in the same folder
+    from func_stock_price import get_stock_price
     from func_Yahoo import get_Yahoo
 
     url_base = 'https://finance.yahoo.com/lookup?s='
@@ -56,6 +57,6 @@ class Company:
         
         return text_
 
-
+    def price()
 apple = Company('apple')
 print(apple.news())
