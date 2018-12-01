@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+import datetime
 
 string1 = 'apple'
 #21
-def website21(name, date_, out_put = False):
+def get_Arabian(name, date_, out_put = False):
     web21 = {}
     #for l in lists:
     url_21 = 'https://www.arabianbusiness.com/search?q=' + name + '&sort=date'
@@ -30,9 +30,9 @@ def website21(name, date_, out_put = False):
                 if dd == '':   # filter the pages without a date
                     pass
                 else:
-                    date1 = datetime.strptime(dd,'%d%b%Y')
+                    date1 =datetime.datetime.strptime(dd,'%d%b%Y')
                     #print(date1)
-                    t1 = datetime.now() - date1
+                    t1 = datetime.datetime.now() - date1
                     t2 = t1.days
                     if t2 > date_:
                         pass

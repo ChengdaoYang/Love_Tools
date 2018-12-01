@@ -37,4 +37,4 @@ def get_Yahoo(ticker, out_put=False):
 
     return text
 
-
+#print(get_Yahoo('AAPL',out_put=True))

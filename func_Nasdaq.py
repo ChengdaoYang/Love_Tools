@@ -1,5 +1,5 @@
-#name = 'sbux'
-def web_nasdaq(name，date_, out_put = False):
+
+def get_Nasdaq(name，date_, out_put = False):
     text = "" 
     count = 1
     flag = True

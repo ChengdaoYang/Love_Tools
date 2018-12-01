@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 
-def get_CNN(name):
+def get_CNN(name, day=7, out_put=False):
 
     url = f'https://www.cnn.com/search/?size=10&q={name}&category=business'
     
@@ -39,6 +39,7 @@ def get_CNN(name):
     list_links = []
     for h3_element in h3_elements:
         try:
+            #print(h3_element.find_element_by_tag_name('span').text)
             list_links.append(h3_element.find_element_by_tag_name("a").get_attribute('href'))
         except:
             continue
@@ -85,9 +86,10 @@ def get_CNN(name):
 
     
 
-    #with open('result.txt', 'w') as fp:
-    #    fp.write(get_articles(list_links))
+    if out_put:
+        with open(f'{name}_CNN_result.txt', 'w') as fp:
+            fp.write(text)
 
     return text
 
-
+#print(get_CNN('apple'))
