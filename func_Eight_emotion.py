@@ -55,9 +55,10 @@ def get_Eight_emotion(text):
     emotion_dict = get_NRC_data()        
     result = get_Emotion_analyzer(text,emotion_dict)
     
-    return ("%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f"%(
-        result['fear'],result['trust'],
-          result['negative'],result['positive'],result['joy'],result['disgust'],
-          result['anticipation'],result['sadness'],result['surprise']))
+    return result
+#    return ("%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f\t%1.2f"%(
+#       result['fear'],result['trust'],
+#         result['negative'],result['positive'],result['joy'],result['disgust'],
+#         result['anticipation'],result['sadness'],result['surprise']))
 
 #get_Eight_emotion(text)
