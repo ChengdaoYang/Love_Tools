@@ -1,11 +1,17 @@
 
 def get_Nasdaq(name，date_, out_put = False):
+
     text = "" 
     count = 1
     flag = True
     while (count <= 20 and flag):
         url = 'https://www.nasdaq.com/symbol/'+name+'/news-headlines?page=' + str(count)        
-        response = requests.get(url)
+        try:
+            response = requests.get(url)
+        except:
+            return None
+        if response.status_code != 200:
+            return None
         containers = BeautifulSoup(response.content,'lxml')      
         containers_news = containers.find("div",{"class":"news-headlines"})
         for container in containers_news.find_all("div"):
@@ -22,7 +28,12 @@ def get_Nasdaq(name，date_, out_put = False):
                     flag = False
                     break       
                 link = container.a['href']
-                response = requests.get(link)
+                try:
+                    response = requests.get(link)
+                except:
+                    return None
+                if response.status_code != 200:
+                    return None
                 page = BeautifulSoup(response.content,'lxml')                     
                 paragraphs = page.find_all("p")                   
                 for paragraph in paragraphs:          
@@ -35,7 +46,8 @@ def get_Nasdaq(name，date_, out_put = False):
       
     return text   
 
-# web_nasdaq('amzn',7,True)
+
+web_nasdaq('amzn',7,True)
                   
                 
    
