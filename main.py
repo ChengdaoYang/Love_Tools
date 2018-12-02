@@ -101,12 +101,12 @@ class Company:
     def news(self, day=7, out_put=False):
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
-        text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
+        #text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
         return text_
 
 
@@ -116,7 +116,7 @@ class Company:
         import matplotlib.pyplot as plt
         if plot:
             df['Close'].plot()
-            plt.savefig(f'{self.keyword}.png')
+            plt.savefig(f'{self.ticker}_price.png')
         return df
   
 
@@ -127,8 +127,8 @@ class Company:
         else:
             self.watch_it = datetime.datetime.utcnow()
       
-    def summary(self, day=7, line=4, plot=False, save_plot=False, out_put=False):
-        return get_summary(comany=self.keyword, day=day, line=line, plot=plot, save_plot=save_plot, out_put=out_put)
+    def summary(self, day=7, lines=4, plot=False, save_plot=False, out_put=False):
+        return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
     def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu']):
         send_email(company=self, email_list=email_list) 
@@ -145,7 +145,7 @@ class Company:
 apple = Company('apple')
 
 print(apple.keyword)
-
+apple.email()
 #print(apple.news(20,True))
 
 

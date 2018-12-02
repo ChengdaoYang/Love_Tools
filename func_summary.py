@@ -97,8 +97,8 @@ def get_summary(company, day=7, lines = 4, plot = False, save_plot=False, out_pu
         plt.imshow(wordcloud)
         plt.axis('off')
         plt.title('Wordcloud picture')
-        plt.savefig(f'{company.keyword}.png')
-        plt.close(fig)
+        plt.savefig(f'{company.ticker}.png')
+        plt.close()
         
     if out_put:
         with open(f'{company.keyword}_summary.txt', 'w') as fp:
