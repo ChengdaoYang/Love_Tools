@@ -36,6 +36,7 @@ def get_summary(name, text, lines = 4, plot = False, out_put = False):
         plt.title('Wordcloud picture')
         plt.savefig(f'{name}.png')
     # get a word list without stopword
+    text = get_filtered(text, name)
     with open('text_input_to_summary.txt', 'w') as fp:
             fp.write(text)
     text_data = PlaintextCorpusReader('','text_input_to_summary.txt')
