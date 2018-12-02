@@ -6,7 +6,7 @@
   text has been filtered
 '''
 import re
-search_word = 'Apple'
+
 def get_filtered(text, search_word, out_put = False):
     strip_text = text.replace('\n\n', ' ')
     strip_text = strip_text.replace('\n', ' ')
