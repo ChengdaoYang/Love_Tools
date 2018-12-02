@@ -19,6 +19,8 @@ from nltk.corpus import PlaintextCorpusReader
 import collections
 from wordcloud import WordCloud,STOPWORDS
 import matplotlib.pyplot as plt
+from func_filter import get_filtered
+
 def get_summary(name, text, lines = 4, plot = False, out_put = False):
     # key: the original sentences. value: the lowercase version of the sentences
     new_sentences = {}
