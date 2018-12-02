@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import datetime
 
 
-def get_Financialex(name, date_, out_put = False):
+def get_Financialex(name, day=7, out_put = False):
     url_2 = 'https://www.financialexpress.com/?search_scope=1&s=' + name
     try:
         response_2 = requests.get(url_2)
@@ -35,12 +35,12 @@ def get_Financialex(name, date_, out_put = False):
                             #print(date1)
                             t1 = datetime.datetime.now() - date1
                             t2 = t1.days
-                            if t2 > date_:
+                            if t2 > day:
                                 pass
                             else:
                                 paras = result_page.find_all("p")
                                 for para in paras:
-                                    text += para.text
+                                    text = text + ' ' + para.text
                 except:
                     continue
             if out_put:
@@ -49,3 +49,5 @@ def get_Financialex(name, date_, out_put = False):
             return text
     except:
         return ''
+
+#print(get_Financialex('apple'))

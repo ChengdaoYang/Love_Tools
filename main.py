@@ -1,10 +1,12 @@
+import datetime
+import time
 import requests
 from bs4 import BeautifulSoup
 
 from func_stock_price import get_stock_price
 
 from func_Arabian import get_Arabian
-from func_Bloomberg import get_Bloomberg
+#from func_Bloomberg import get_Bloomberg
 from func_CNN import get_CNN
 from func_Financialex import get_Financialex
 from func_Fortune import get_Fortune
@@ -29,11 +31,12 @@ class Company:
     url_base = 'https://finance.yahoo.com/lookup?s='
 
     #constructor
-    def __init__(self,keyword, email=False, warning=False):
+    def __init__(self,keyword, email=False):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
         self.email = email
-        self.warning = warning
+        self.counter = datetime.timedelta(0)
+        self.watch_it = None
 
     #getter & setter
     @property
@@ -53,30 +56,33 @@ class Company:
         t = self.ticker(keyword)
         self._ticker = t
 
-#    @property
-#    def monitor(self):
-#        return self._monitor
-#    
-#    @monitor.setter
-#    def monitor(self,x):
-#        if x == True:
-#            
-#        self._monitor = x
-#    
-#    @property
-#    def warning(self):
-#        return self._warning
-#    
-#    @warning.setter
-#    def warning(self,x):
-#        if x == True:
-#            
-#        self._ticker = t
-#
-#    
+    @property
+    def watch_it(self):
+        return self._watch_it
+    @watch_it.setter
+    def watch_it(self, x):
+        self._watch_it = x
+
+            
+    @property
+    def counter(self):
+        return self._counter
+    @counter.setter
+    def counter(self, x):
+        self._counter = x        
+ 
+    @property
+    def elapsed(self):
+        if self.watch_it:
+            diff = (datetime.datetime.utcnow() - self.watch_it)
+            time_elapsed = int(self.counter.total_seconds())+int(diff.total_seconds())
+            if time_elapsed%2 == 0:
+                print('send email')
+            return time_elapsed
+        return self.counter
+    
 
     #class methods:
-
     #Ticker function will get the ticker from Yahoo base on company name
     def ticker(self,keyword):
         response = requests.get(self.url_base + keyword)
@@ -93,12 +99,13 @@ class Company:
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
         text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
-        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        #text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
         return text_
+
 
     def price(self, day=7, plot=False):
         df =  get_stock_price(ticker=self.ticker, day=day)
@@ -108,11 +115,44 @@ class Company:
             df['Close'].plot()
             plt.savefig(f'{self.keyword}.png')
         return df
+  
+
+    def monitor(self):
+        if self.watch_it:
+            self.counter += (datetime.datetime.utcnow() - self.watch_it)
+            self.watch_it = False
+        else:
+            self.watch_it = datetime.datetime.utcnow()
+      
+        
+    def __repr__(self):
+        return "<Clock {} ({})>".format(
+            self.elapsed,
+            'started' if self.watch_it else 'stopped' )
+
+
+
+
 
 
 apple = Company('apple')
-print(apple.news(20,True))
+#print(apple.news(20,True))
 #apple.price(plot=True)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)
+print(apple.elapsed)
+apple.monitor()
+print(apple)
+
+time.sleep(2)
+print(apple)
+print(apple.elapsed)
+time.sleep(1)
+print(apple)
+
+print(apple)
+time.sleep(2)
+print(apple)
+apple.monitor()
+
