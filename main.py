@@ -136,8 +136,7 @@ class Company:
 
 
 apple = Company('apple')
-print(apple.ticker)
-#print(apple.news(20,True))
+print(apple.news(20,True))
 
 #apple.price(plot=True)
 
