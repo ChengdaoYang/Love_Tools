@@ -53,7 +53,7 @@ def get_Fortune(keyword , date, out_put = False):
         j = j + 1
 
     if all_links == []:
-        return None
+        return ''
 
     def get_content(url):
         response = requests.get(url)
