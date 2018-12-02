@@ -40,7 +40,7 @@ def get_Financialex(name, date_, out_put = False):
                             else:
                                 paras = result_page.find_all("p")
                                 for para in paras:
-                                    text += para.text
+                                    text = text + ' ' + para.text
                 except:
                     continue
             if out_put:
