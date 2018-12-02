@@ -45,6 +45,7 @@ def get_Nasdaq(name,day, out_put = False):
             return None
 
 print(get_Nasdaq('amzn',7,True))
+
                   
                 
    

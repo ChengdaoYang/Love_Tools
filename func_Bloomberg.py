@@ -43,3 +43,4 @@ def get_Bloomberg(name, day, out_put = False, debug=False):
     
 #a = get_Bloomberg('Apple', day = 30, out_put = False)
 #print(a)
+

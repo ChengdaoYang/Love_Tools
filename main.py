@@ -3,22 +3,20 @@ from bs4 import BeautifulSoup
 
 from func_stock_price import get_stock_price
 
-from func_Arabian import get_
-from func_Bloomberg import get_
-from func_CNN import get_
-from func_ import get_
-from func_ import get_
-from func_ import get_
-from func_ import get_
-from func_ import get_
-from func_ import get_
-from func_ import get_
+from func_Arabian import get_Arabian
+from func_Bloomberg import get_Bloomberg
+from func_CNN import get_CNN
+from func_Financialex import get_Financialex
+from func_Fortune import get_Fortune
+from func_Nasdaq import get_Nasdaq
+from func_Yahoo import get_Yahoo
 
-AAPL_result.txt			func_CNN.py			func_Yahoo.py			list_of_web.ipynb
-CNN_selenium_scraping_yang.py	func_Eight_emotion.py		func_filter.py			main.py
-__pycache__			func_Financialex.py		func_pos_neg.py			module.txt
-func_Arabian.py			func_Fortune.py			func_stock_price.py
-func_Bloomberg.py		func_Nasdaq.py			func_word_cloud.py
+
+#AAPL_result.txt			func_CNN.py			func_Yahoo.py			list_of_web.ipynb
+#CNN_selenium_scraping_yang.py	func_Eight_emotion.py		func_filter.py			main.py
+#__pycache__			func_Financialex.py		func_pos_neg.py			module.txt
+#func_Arabian.py			func_Fortune.py			func_stock_price.py
+#func_Bloomberg.py		func_Nasdaq.py			func_word_cloud.py
 
 
 class Company:
@@ -93,14 +91,13 @@ class Company:
     #News function get all news article from Yahoo, CNN ,Fortune, Bloomber.. and return a long str contains all.
     def news(self, day=7, out_put=False):
         text_ = ''
-        text_ = get_Yahoo(self.ticker)
-#        text_ = text_ + get_         
-#        text_ = text_ + get_
-#        text_ = text_ + get_
-#        text_ = text_ + get_
-#        text_ = text_ + get_
-#        text_ = text_ + get_
-#        text_ = text_ + get_
+        text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
+        text_ = text_ + get_Arabian(self, day=day, out_put=out_put)
+        text_ = text_ + get_Bloomberg(self, day=day, out_put=out_put)
+        text_ = text_ + get_CNN(self, day=day, out_put=out_put)
+        text_ = text_ + get_Financialex(self, day=day, out_put=out_put)
+        text_ = text_ + get_Fortune(self, day=day, out_put=out_put)
+        text_ = text_ + get_Nasdaq(self, day=day, out_put=out_put)
         return text_
 
     def price(self, day=7, plot=False):
@@ -114,7 +111,7 @@ class Company:
 
 
 apple = Company('apple')
-print(apple.news())
+print(apple.news(20,True)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)
