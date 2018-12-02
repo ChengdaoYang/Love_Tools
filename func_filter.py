@@ -1,25 +1,25 @@
 '''
-n use: filter the txt file and return the sentences containing a specific company name
+ function use: filter the txt file and return the sentences containing a specific company name
  input:
-  file_name: this is the name of the file you want to filter
-  my_list: a list of the company name and the stock abbreviation you want to filter
-
- output: the text has been filtered
+    text: need to be filtered and
+    search_word: use to be filtered
+ output:
+     text has been filtered
 '''
 import re
-list1 = ['Apple','AAPL']
-def get_filtered(file_name, my_list):
-    f = open(file_name,'r')
-    c = f.read()
-    sentences = re.split(r' *[\.\?!][\'"\)\]]* *', c)
-    text1 = ""
-    pattern = r''
+search_word = 'Apple'
+def get_filtered(text, search_word, out_put = False):
+    strip_text = text.replace('\n\n', ' ')
+    strip_text = strip_text.replace('\n', ' ')
+    sentences = re.split('\. |\; |\? |\! ', strip_text)
+    filtered_text = ""
     for i in range(len(sentences)):
         line1 = sentences[i]
-        if sentences[i] != None:
-            if my_list[0] in line1 or my_list[1] in line1:
-                line2 = line1 + '.'
-                text1 += line2
-    return text1
-    #pattern = r'^'
-print(get_string('result.txt',list1))
+        if line1 != None and line1 not in filtered_text:
+            if search_word in line1:
+                line_with_dot = line1 + '.' + ' '
+                filtered_text += line_with_dot
+    if out_put:
+        with open(f'{search_word}_filtered.txt', 'w') as fp:
+            fp.write(filtered_text)
+    return filtered_text
