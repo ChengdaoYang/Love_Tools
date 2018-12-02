@@ -1,7 +1,14 @@
-# get the text from bloomberg and return news def get_Bloomberg(name, day, out_put = False, debug=False): url = "https://www.bloombergquint.com/search?q=" + name try: #request the url, Soup parse and get tag of each relavent article response = requests.get(url)  
+import time
+# get the text from bloomberg and return news 
+def get_Bloomberg(name, day, out_put = False, debug = False):
+    
+    url = "https://www.bloombergquint.com/search?q=" + name
+    try:
+    #request the url, Soup parse and get tag of each relavent article
+        response = requests.get(url)  
         containers = BeautifulSoup(response.content,'lxml')
         if response.status_code != 200:
-            return None
+            return ""
     
         text = ""
         for container in containers.find_all("li",{"class":"topic-page__item"}):
@@ -24,17 +31,17 @@
                 paragraphs = page.find_all("p")
         
                 for paragraph in paragraphs:
-                    text += paragraph.text
+                    text = text + ' ' + paragraph.text
             except:
-                break               
+                continue               
         if out_put:
             with open(f'{name}_bloomberg.txt', 'w', encoding="utf-8") as fp:
                 fp.write(text)
                 
         return text
     except:  
-        return None
-    
-#a = get_Bloomberg('Apple', day = 30, out_put = False)
-#print(a)
-
+        return ""
+'''    
+a = get_Bloomberg('Apple', day = 30, out_put = False)
+print(a)
+'''
