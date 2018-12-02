@@ -1,3 +1,4 @@
+import re
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -33,9 +34,15 @@ def get_Yahoo(ticker,day=7, out_put=False, debug=False):
         #get all article links from a tags and put into a list
         url_list = []
         for tag in All_tags:
+            link = tag.get('href')
             if debug:
-                print(tag.get('href'))
-            url_list.append(tag.get('href'))
+                print(link, '\n')
+            pattern = r'^http'
+            if re.match(pattern,link):
+                url_list.append(link)
+            else:
+                url_list.append(base_url + link)
+
 
 
         if debug:
@@ -47,13 +54,13 @@ def get_Yahoo(ticker,day=7, out_put=False, debug=False):
         for link in url_list:
             time.sleep(random.random())
             if debug:
-                print(base_url + link)
-            response = requests.get(base_url + link)
+                print(link)
+            response = requests.get(link)
             Soup = BeautifulSoup(response.content, 'lxml')
             All_tags = Soup.find_all('p', {'class':'canvas-atom canvas-text Mb(1.0em) Mb(0)--sm Mt(0.8em)--sm'})
         
             if debug:
-                print('getting text from:', base_url+link)
+                print('getting text from:', link)
             for tag in All_tags:
                 text = text + (tag.get_text())
 

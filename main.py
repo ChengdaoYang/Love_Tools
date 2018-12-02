@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from func_stock_price import get_stock_price
 
 from func_Arabian import get_Arabian
-#from func_Bloomberg import get_Bloomberg
+from func_Bloomberg import get_Bloomberg
 from func_CNN import get_CNN
 from func_Financialex import get_Financialex
 from func_Fortune import get_Fortune
@@ -99,7 +99,7 @@ class Company:
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
         text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
         text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
@@ -136,23 +136,24 @@ class Company:
 
 
 apple = Company('apple')
-#print(apple.news(20,True))
+print(apple.news(20,True))
+
 #apple.price(plot=True)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)
-print(apple.elapsed)
-apple.monitor()
-print(apple)
-
-time.sleep(2)
-print(apple)
-print(apple.elapsed)
-time.sleep(1)
-print(apple)
-
-print(apple)
-time.sleep(2)
-print(apple)
-apple.monitor()
+##print(apple.elapsed)
+##apple.monitor()
+##print(apple)
+##
+##time.sleep(2)
+##print(apple)
+##print(apple.elapsed)
+##time.sleep(1)
+##print(apple)
+##
+##print(apple)
+##time.sleep(2)
+##print(apple)
+##apple.monitor()
 

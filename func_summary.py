@@ -1,11 +1,15 @@
 """
-summary function: get the a short version of the test
+summary function: get the a short version of the text and get wordcloud picture of the text(optional)
 input:
-    text: the text need to be filtered
     name: name of the company
+    text: the text need to be filtered
     line: lines of the summary
+    plot: decide whether to plot word_cloud picture
+    out_put: whether to save a summary.txt file
 output:
     text of summary
+first install wordcloud
+enter "pip3 install wordcloud" in terminal
 """
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import sent_tokenize
@@ -13,12 +17,26 @@ from nltk.probability import FreqDist
 from nltk.corpus import stopwords
 from nltk.corpus import PlaintextCorpusReader
 import collections
-def get_summary(text, name, lines = 4, out_put = False):
+from wordcloud import WordCloud,STOPWORDS
+import matplotlib.pyplot as plt
+from func_filter import get_filtered
+
+def get_summary(name, text, lines = 4, plot = False, out_put = False):
     # key: the original sentences. value: the lowercase version of the sentences
     new_sentences = {}
     # key: the original sentences. value: the sum of the frequencies of each word in the sentence
     new_sentence_counts = {}
+    # if you decided to draw a wordcloud picture
+    if plot == True:
+        wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=3000, height=2500,
+                              max_words=50).generate(text)
+        plt.figure(1, figsize=(13, 13))
+        plt.imshow(wordcloud)
+        plt.axis('off')
+        plt.title('Wordcloud picture')
+        plt.savefig(f'{name}.png')
     # get a word list without stopword
+    text = get_filtered(name, text)
     with open('text_input_to_summary.txt', 'w') as fp:
             fp.write(text)
     text_data = PlaintextCorpusReader('','text_input_to_summary.txt')
@@ -62,3 +80,9 @@ def get_summary(text, name, lines = 4, out_put = False):
         with open(f'{name}_summary.txt', 'w') as fp:
             fp.write(summary)
     return summary
+
+'''
+c = open('Amazon_filtered.txt','r')
+r = c.read()
+print(get_summary('amzn', r,1, True, False))
+'''
