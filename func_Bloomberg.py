@@ -31,7 +31,7 @@ def get_Bloomberg(name, day, out_put = False, debug = False):
                 paragraphs = page.find_all("p")
         
                 for paragraph in paragraphs:
-                    text += paragraph.text
+                    text = text + ' ' + paragraph.text
             except:
                 continue               
         if out_put:
@@ -41,7 +41,7 @@ def get_Bloomberg(name, day, out_put = False, debug = False):
         return text
     except:  
         return ""
-    
+'''    
 a = get_Bloomberg('Apple', day = 30, out_put = False)
 print(a)
-
+'''

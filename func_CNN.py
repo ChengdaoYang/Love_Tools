@@ -29,7 +29,7 @@ def get_CNN(name, day=7, out_put=False):
         WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//h3[@class='cnn-search__result-headline']")))
     except TimeoutException:
         print('Timed out waiting for page to load')
-        driver.quit()
+        return ''
 
     # find_elements_by_xpath/or _by_tag_name returns an array of selenium objects.
     h3_elements = driver.find_elements_by_tag_name("h3")
@@ -74,12 +74,15 @@ def get_CNN(name, day=7, out_put=False):
         except TimeoutException:
             print('Timed out waiting for page to load')
             list_fail_link.append(i_link)
-            driver.quit()
+            continue
     
         p_elements = driver.find_elements_by_class_name("zn-body__paragraph")
         #get article and coleect all into var:text
         for p_element in p_elements:
-            text = text + str(p_element.text)
+            try:
+                text = text + ' ' +  str(p_element.text)
+            except:
+                continue
         
         #clease driver
         driver.quit()

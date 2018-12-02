@@ -5,8 +5,8 @@ import json
 import time
 import random
 
-def get_Yahoo(ticker, out_put=False, debug=False):
-
+def get_Yahoo(ticker,day=7, out_put=False, debug=False):
+    #day is not yet functional, due to the difficulty in implimenting the yahoo webscraping
     base_url = 'https://finance.yahoo.com'
     url = f"https://finance.yahoo.com/quote/{ticker}/news?p={ticker}"
 
@@ -21,7 +21,7 @@ def get_Yahoo(ticker, out_put=False, debug=False):
                 print(response)
             Soup = BeautifulSoup(response.content,'lxml')
         else:
-            return 'error'
+            return ''
         All_tags = Soup.find_all('a',
                                 {'class':
                                 'Fw(b) Fz(20px) Lh(23px) LineClamp(2,46px) Fz(17px)'
@@ -43,28 +43,28 @@ def get_Yahoo(ticker, out_put=False, debug=False):
             print('start getting article from url_lists')
         #get text from each article url and put into one big lonf string
         text = ''
-        try:
-            for link in url_list:
-                time.sleep(random.random())
-                if debug:
-                    print(base_url + link)
-                response = requests.get(base_url + link)
-                Soup = BeautifulSoup(response.content, 'lxml')
-                All_tags = Soup.find_all('p', {'class':'canvas-atom canvas-text Mb(1.0em) Mb(0)--sm Mt(0.8em)--sm'})
-            
-                if debug:
-                    print('getting text from:', base_url+link)
-                for tag in All_tags:
-                    text = text + (tag.get_text())
-        except:
-            print('error')
+        
+        for link in url_list:
+            time.sleep(random.random())
+            if debug:
+                print(base_url + link)
+            response = requests.get(base_url + link)
+            Soup = BeautifulSoup(response.content, 'lxml')
+            All_tags = Soup.find_all('p', {'class':'canvas-atom canvas-text Mb(1.0em) Mb(0)--sm Mt(0.8em)--sm'})
+        
+            if debug:
+                print('getting text from:', base_url+link)
+            for tag in All_tags:
+                text = text + (tag.get_text())
 
+
+    
+        if out_put:
+            with open(f'{ticker}_result.txt', 'w') as fp:
+                fp.write(text)
+
+        return text
     except:
-        print('error')
-    if out_put:
-        with open(f'{ticker}_result.txt', 'w') as fp:
-            fp.write(text)
-
-    return text
+        return ''
 
 #print(get_Yahoo('AAPL',out_put=True, debug=True))
