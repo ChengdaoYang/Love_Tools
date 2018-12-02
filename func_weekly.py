@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec  2 11:41:01 2018
-
-@author: xws
-"""
 import datetime
 from pandas_datareader import data as web
 def get_weekly(ticker, start):

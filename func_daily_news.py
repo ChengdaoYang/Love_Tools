@@ -3,8 +3,10 @@ from bs4 import BeautifulSoup
 import re
 import datetime
 
+# input company name, backtest period
+# Output dictionary
 def get_daily_news(name, day, out_put = False):
-    name = 'aapl'
+#    name = 'aapl'
     count = 1
     dic = {}
     a ={}
@@ -29,7 +31,6 @@ def get_daily_news(name, day, out_put = False):
                     if delta > day:
                         flag = False
                         break 
-                    print(publish_date, last_publish_date)
                     if publish_date.weekday() > last_publish_date.weekday() or (last_publish_date - publish_date).days > 7:
 #                         print('next')
                         dic[last_publish_date] = text

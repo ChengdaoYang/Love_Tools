@@ -1,5 +1,5 @@
-# from nltk import word_tokenize
-
+from nltk import word_tokenize
+# Return positive and negative words 
 def get_pos_neg_words():
     def get_words(url):
         import requests
@@ -23,10 +23,13 @@ def get_pos_neg_words():
 
 positive_words,negative_words = get_pos_neg_words()
 
-def get_pos_neg_stock(data):
+# input text --> 
+# output positive and negtive percentage
+def get_pos_neg_stock(text):
     pos = neg = 0
-    number = len(word_tokenize(data))
-    for word in word_tokenize(data):
+    from nltk import word_tokenize
+    number = len(word_tokenize(text))
+    for word in word_tokenize(text):
         if word in positive_words:
             pos+=1
         if word in negative_words:
