@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import datetime
 
-def get_Nasdaq(name,day, out_put = False):
+def get_Nasdaq(name, day, out_put = False):
     text = "" 
     count = 1
     flag = True
@@ -13,7 +13,7 @@ def get_Nasdaq(name,day, out_put = False):
             response = requests.get(url)
             if response.status_code != 200:
                 print('can not connect',response.status_code)
-                return None
+                return ""
             containers = BeautifulSoup(response.content,'lxml')      
             containers_news = containers.find("div",{"class":"news-headlines"})
             for container in containers_news.find_all("div"):
@@ -29,11 +29,17 @@ def get_Nasdaq(name,day, out_put = False):
                     if delta > day:
                         break       
                     link = container.a['href']
-                    response = requests.get(link)
-                    page = BeautifulSoup(response.content,'lxml')                     
-                    paragraphs = page.find_all("p")                   
-                    for paragraph in paragraphs:          
-                        text += paragraph.text            
+                    
+                    try:
+                        response = requests.get(link)
+                        if response.status_code != 200:
+                            continue                            
+                        page = BeautifulSoup(response.content,'lxml')                     
+                        paragraphs = page.find_all("p")                   
+                        for paragraph in paragraphs:          
+                            text += paragraph.text   
+                    except:
+                        continue
             count += 1   
             
             if out_put:
@@ -42,7 +48,7 @@ def get_Nasdaq(name,day, out_put = False):
               
             return text   
         except:
-            return None
+            return ""
 
 print(get_Nasdaq('amzn',7,True))
 
