@@ -19,13 +19,13 @@ Welcome to Love_Tools’s Team project :blush:
 *****************
 ### Required Modules
 *****************
-* Yangdao Cheng
-- Wansi Xie
-- Manchun Sun
-* Xiangdong Duan
 ### Drawbacks
 ************
 ### Further Developments
 ********************
 ### Group Members
+- Yangdao Cheng
+- Wansi Xie
+- Manchun Sun
+- Xiangdong Duan
 ****************
