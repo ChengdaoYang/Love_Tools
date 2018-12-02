@@ -13,7 +13,7 @@ from nltk.probability import FreqDist
 from nltk.corpus import stopwords
 from nltk.corpus import PlaintextCorpusReader
 import collections
-def get_summary(text, name, lines = 5, out_put = False):
+def get_summary(text, name, lines = 4, out_put = False):
     # key: the original sentences. value: the lowercase version of the sentences
     new_sentences = {}
     # key: the original sentences. value: the sum of the frequencies of each word in the sentence
@@ -25,6 +25,7 @@ def get_summary(text, name, lines = 5, out_put = False):
     text = text_data.raw()
     strip_text = text.replace('\n\n', ' ')
     strip_text = strip_text.replace('\n', ' ')
+    strip_text = strip_text.replace('.', '. ')
     words = word_tokenize(strip_text)
     summary = ''
     # get word frequencies
@@ -54,7 +55,9 @@ def get_summary(text, name, lines = 5, out_put = False):
                         key = lambda x: x[1],
                         reverse = True)[:lines])
     for items in sorted_sentences:
-        summary += items
+        summary = summary + ' ' + items
+    summary = ' '.join(summary.split())
+    summary.replace(' ,',',')
     if out_put:
         with open(f'{name}_summary.txt', 'w') as fp:
             fp.write(summary)
