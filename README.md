@@ -1,6 +1,6 @@
 Welcome to Love_Tools’s Team project :blush:
 ===================================
-![Our Team](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/Team_Pic.png Our Team)
+![Our Team](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/Team_Pic.png "Our Team")
 ===================================
 ## Repository
 * [What is it?](#What-is-it?)
@@ -23,5 +23,5 @@ Welcome to Love_Tools’s Team project :blush:
 ===================================
 ### Further Developments
 ===================================
-###Group Members
+### Group Members
 ===================================
