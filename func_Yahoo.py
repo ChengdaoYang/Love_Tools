@@ -67,4 +67,4 @@ def get_Yahoo(ticker,day=7, out_put=False, debug=False):
     except:
         return ''
 
-#print(get_Yahoo('AAPL',out_put=True, debug=True))
+print(get_Yahoo('AAPL',out_put=True, debug=True))
