@@ -12,16 +12,20 @@ Welcome to Love_Tools’s Team project :blush:
 * [Group Members](#Group-Members)
 
 ### What is it?
-===================================
+***********
 ### Main Feature
-===================================
+*************
 ### How to operate it?
-===================================
+*****************
 ### Required Modules
-===================================
+*****************
+* Yangdao Cheng
+- Wansi Xie
+- Manchun Sun
+* Xiangdong Duan
 ### Drawbacks
-===================================
+************
 ### Further Developments
-===================================
+********************
 ### Group Members
-===================================
+****************
