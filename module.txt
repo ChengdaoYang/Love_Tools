@@ -14,3 +14,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.utils import parseaddr, formataddr
 import smtplib
+from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
+from nltk.probability import FreqDist
+from nltk.corpus import stopwords
+from nltk.corpus import PlaintextCorpusReader
+import collections
+from wordcloud import WordCloud,STOPWORDS
+import matplotlib.pyplot as plt
