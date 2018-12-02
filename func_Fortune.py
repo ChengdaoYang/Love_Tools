@@ -77,7 +77,7 @@ def get_Fortune(keyword , date, out_put = False):
         all_text = all_text + sen
 
     if out_put == True:
-    with open(f'{keyword}_Fortune.txt', 'w', encoding="utf-8") as fp:
-        fp.write(all_text)
+        with open(f'{keyword}_Fortune.txt', 'w', encoding="utf-8") as fp:
+            fp.write(all_text)
 
     return all_text

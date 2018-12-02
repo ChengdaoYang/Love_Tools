@@ -1,10 +1,4 @@
-# get the text from bloomberg and return news 
-def get_Bloomberg(name, day, out_put = False, debug=False):
-    
-    url = "https://www.bloombergquint.com/search?q=" + name
-    try:
-    #request the url, Soup parse and get tag of each relavent article
-        response = requests.get(url)  
+# get the text from bloomberg and return news def get_Bloomberg(name, day, out_put = False, debug=False): url = "https://www.bloombergquint.com/search?q=" + name try: #request the url, Soup parse and get tag of each relavent article response = requests.get(url)  
         containers = BeautifulSoup(response.content,'lxml')
         if response.status_code != 200:
             return None

@@ -29,10 +29,10 @@ class Company:
     url_base = 'https://finance.yahoo.com/lookup?s='
 
     #constructor
-    def __init__(self,keyword, monitor=False, warning=False):
+    def __init__(self,keyword, email=False, warning=False):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
-        self.monitor = monitor
+        self.email = email
         self.warning = warning
 
     #getter & setter
@@ -92,12 +92,12 @@ class Company:
     def news(self, day=7, out_put=False):
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
-        text_ = text_ + get_Arabian(self, day=day, out_put=out_put)
-        text_ = text_ + get_Bloomberg(self, day=day, out_put=out_put)
-        text_ = text_ + get_CNN(self, day=day, out_put=out_put)
-        text_ = text_ + get_Financialex(self, day=day, out_put=out_put)
-        text_ = text_ + get_Fortune(self, day=day, out_put=out_put)
-        text_ = text_ + get_Nasdaq(self, day=day, out_put=out_put)
+        text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
         return text_
 
     def price(self, day=7, plot=False):
@@ -106,12 +106,13 @@ class Company:
         import matplotlib.pyplot as plt
         if plot:
             df['Close'].plot()
-            plt.show()
+            plt.savefig(f'{self.keyword}.png')
         return df
 
 
 apple = Company('apple')
-print(apple.news(20,True)
+print(apple.news(20,True))
+#apple.price(plot=True)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)

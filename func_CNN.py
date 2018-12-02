@@ -74,7 +74,7 @@ def get_CNN(name, day=7, out_put=False):
         except TimeoutException:
             print('Timed out waiting for page to load')
             list_fail_link.append(i_link)
-            driver.quit()
+            continue
     
         p_elements = driver.find_elements_by_class_name("zn-body__paragraph")
         #get article and coleect all into var:text
