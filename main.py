@@ -3,7 +3,9 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+from func_send_email import send_email
 from func_stock_price import get_stock_price
+from func_summary import get_summary
 
 from func_Arabian import get_Arabian
 from func_Bloomberg import get_Bloomberg
@@ -31,10 +33,10 @@ class Company:
     url_base = 'https://finance.yahoo.com/lookup?s='
 
     #constructor
-    def __init__(self,keyword, email=False):
+    def __init__(self,keyword, is_email=False):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
-        self.email = email
+        self.is_email = is_email
         self.counter = datetime.timedelta(0)
         self.watch_it = None
 
@@ -45,6 +47,7 @@ class Company:
 
     @keyword.setter
     def keyword(self,keyword):
+        keyword = keyword[0].upper() + keyword[1:].lower()
         self._keyword = keyword
 
     @property
@@ -124,7 +127,11 @@ class Company:
         else:
             self.watch_it = datetime.datetime.utcnow()
       
-        
+    def summary(self, day=7, line=4, plot=False, save_plot=False, out_put=False):
+        return get_summary(comany=self.keyword, day=day, line=line, plot=plot, save_plot=save_plot, out_put=out_put)
+
+    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu']):
+        send_email(company=self, email_list=email_list) 
     def __repr__(self):
         return "<Clock {} ({})>".format(
             self.elapsed,
@@ -136,24 +143,29 @@ class Company:
 
 
 apple = Company('apple')
-print(apple.news(20,True))
+
+print(apple.keyword)
+
+#print(apple.news(20,True))
+
 
 #apple.price(plot=True)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)
-##print(apple.elapsed)
-##apple.monitor()
-##print(apple)
-##
-##time.sleep(2)
-##print(apple)
-##print(apple.elapsed)
-##time.sleep(1)
-##print(apple)
-##
-##print(apple)
-##time.sleep(2)
-##print(apple)
-##apple.monitor()
+#print(apple.elapsed)
+
+#apple.monitor()
+#print(apple)
+#
+#time.sleep(2)
+#print(apple)
+#print(apple.elapsed)
+#time.sleep(1)
+#print(apple)
+#
+#print(apple)
+#time.sleep(2)
+#print(apple)
+#apple.monitor()
 

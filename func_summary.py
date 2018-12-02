@@ -1,3 +1,4 @@
+#decription of the funcion:
 """
 summary function: get the a short version of the text and get wordcloud picture of the text(optional)
 input:
@@ -11,6 +12,7 @@ output:
 first install wordcloud
 enter "pip3 install wordcloud" in terminal
 """
+
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.probability import FreqDist
@@ -21,22 +23,19 @@ from wordcloud import WordCloud,STOPWORDS
 import matplotlib.pyplot as plt
 from func_filter import get_filtered
 
-def get_summary(name, text, lines = 4, plot = False, out_put = False):
+#summary return a summay of all news on scraped of a company, with option of plot and/or save the word cloud image
+def get_summary(company, day=7, lines = 4, plot = False, save_plot=False, out_put = False):
+    text = company.news(day=day)
     # key: the original sentences. value: the lowercase version of the sentences
     new_sentences = {}
     # key: the original sentences. value: the sum of the frequencies of each word in the sentence
     new_sentence_counts = {}
-    # if you decided to draw a wordcloud picture
-    if plot == True:
-        wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=3000, height=2500,
-                              max_words=50).generate(text)
-        plt.figure(1, figsize=(13, 13))
-        plt.imshow(wordcloud)
-        plt.axis('off')
-        plt.title('Wordcloud picture')
-        plt.savefig(f'{name}.png')
-    # get a word list without stopword
-    text = get_filtered(name, text)
+
+
+    #calling the filtere function in the same dir to filter the news with only self.keyword
+    text = get_filtered(search_word=company.keyword, text=text)
+    
+
     with open('text_input_to_summary.txt', 'w') as fp:
             fp.write(text)
     text_data = PlaintextCorpusReader('','text_input_to_summary.txt')
@@ -48,7 +47,7 @@ def get_summary(name, text, lines = 4, plot = False, out_put = False):
     summary = ''
     # get word frequencies
     lowercase_words = [word.lower() for word in words
-                       if word not in stopwords.words() and word.isalpha()]
+                       if word not in stopwords.words()]
     article_length = len(lowercase_words)
 
     # decide the number of words with high frequencies
@@ -76,13 +75,38 @@ def get_summary(name, text, lines = 4, plot = False, out_put = False):
         summary = summary + ' ' + items
     summary = ' '.join(summary.split())
     summary.replace(' ,',',')
+
+    # if you decided to draw a wordcloud picture
+    if plot == True:
+        wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=3000, height=2500,
+                              max_words=50).generate(text)
+        plt.figure(1, figsize=(13, 13))
+        plt.imshow(wordcloud)
+        plt.axis('off')
+        plt.title('Wordcloud picture')
+
+
+
+    if save_plot:
+        # Turn interactive plotting off
+        plt.ioff()
+        
+        wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=3000, height=2500,
+                              max_words=50).generate(text)
+
+        plt.imshow(wordcloud)
+        plt.axis('off')
+        plt.title('Wordcloud picture')
+        plt.savefig(f'{company.keyword}.png')
+        plt.close(fig)
+        
     if out_put:
-        with open(f'{name}_summary.txt', 'w') as fp:
+        with open(f'{company.keyword}_summary.txt', 'w') as fp:
             fp.write(summary)
     return summary
 
-'''
-c = open('Amazon_filtered.txt','r')
-r = c.read()
-print(get_summary('amzn', r,1, True, False))
-'''
+
+#c = open('Amazon_filtered.txt','r')
+#r = c.read()
+#print(get_summary('amzn', r,1, True, False))
+

@@ -3,11 +3,11 @@ import datetime
 from bs4 import BeautifulSoup
 
 
-def get_Fortune(keyword , date, out_put = False):
+def get_Fortune(keyword , day=7, out_put = False):
 
     def get_old_day():
         now = datetime.datetime.now()
-        date_delta = datetime.timedelta(days = date)
+        date_delta = datetime.timedelta(days = day)
         old_day = now - date_delta
         return old_day
 
