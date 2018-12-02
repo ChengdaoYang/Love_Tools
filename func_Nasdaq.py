@@ -27,6 +27,7 @@ def get_Nasdaq(name, day, out_put = False):
                     today = datetime.datetime.today()
                     delta = (today - public_date).days
                     if delta > day:
+                        flag = False
                         break       
                     link = container.a['href']
                     
