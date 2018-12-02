@@ -3,11 +3,11 @@ import datetime
 from bs4 import BeautifulSoup
 
 
-def get_Fortune(keyword = 'Apple'):
+def get_Fortune(keyword , date, out_put = False):
 
     def get_old_day():
         now = datetime.datetime.now()
-        date_delta = datetime.timedelta(days = 30)
+        date_delta = datetime.timedelta(days = date)
         old_day = now - date_delta
         return old_day
 
@@ -16,27 +16,32 @@ def get_Fortune(keyword = 'Apple'):
         return base_url
 
     def find_in_one_page(url,j):
-        response = requests.get(url)
-        results_page = BeautifulSoup(response.content)
-        all_div_tags = results_page.find_all('div',{'class':'headline heading-content-tiny margin-8-bottom media-heading'})
-        data = []
-        for tag in all_div_tags:
-            # print(tag)
-            a_tag = tag.find('a')
-            data.append(a_tag.get('href'))
-        selected_links = []
-        for page in data:
-            date_if = page[19:29]
-            try:
-                d = datetime.datetime.strptime(date_if, '%Y/%m/%d')
-                if d > old_day:
-                    selected_links.append(page)
-                else:
-                    j = -100
-                    break
-            except:
-                continue
-        return selected_links,j
+        try:
+            response = requests.get(url)
+            results_page = BeautifulSoup(response.content)
+            all_div_tags = results_page.find_all('div',{'class':'headline heading-content-tiny margin-8-bottom media-heading'})
+            data = []
+            for tag in all_div_tags:
+                # print(tag)
+                a_tag = tag.find('a')
+                data.append(a_tag.get('href'))
+            selected_links = []
+            for page in data:
+                date_if = page[19:29]
+                try:
+                    d = datetime.datetime.strptime(date_if, '%Y/%m/%d')
+                    if d > old_day:
+                        selected_links.append(page)
+                    else:
+                        j = -100
+                        break
+                except:
+                    continue
+            return selected_links, j
+        except:
+            j = -100
+            return [],j
+
 
     old_day = get_old_day()
     j = 1
@@ -46,6 +51,9 @@ def get_Fortune(keyword = 'Apple'):
         selected_links,j = find_in_one_page(url,j)
         all_links.extend(selected_links)
         j = j + 1
+
+    if all_links == []:
+        return None
 
     def get_content(url):
         response = requests.get(url)
@@ -68,7 +76,8 @@ def get_Fortune(keyword = 'Apple'):
             sen = sen + one_content[j]
         all_text = all_text + sen
 
+    if out_put == True:
+    with open(f'{keyword}_Fortune.txt', 'w', encoding="utf-8") as fp:
+        fp.write(all_text)
+
     return all_text
-
-
-web2_result = get_Fortune(keyword = 'Google')
