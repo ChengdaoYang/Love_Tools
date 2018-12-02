@@ -23,7 +23,7 @@ def get_CNN(name, day=7, out_put=False):
     driver.implicitly_wait(0.01)
     driver.get(url)
     
-    # Wait 120 seconds for page to load the need elements
+    # Wait maximum 120 seconds for page to load the need elements
     timeout = 120
     try:
         WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//h3[@class='cnn-search__result-headline']")))
