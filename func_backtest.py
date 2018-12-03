@@ -77,18 +77,20 @@ def get_backtest(ticker, day):
         return tag
     
     dic = get_daily_news(ticker, day, out_put = False)
+   
     
+
     output = []
-    for date_ in dic.keys():
-        text = dic[date_]
+    for date_ in range(1,len(dic.keys())):
+        key = list(dic.keys())
+        text = dic[key[date_]]
         text = get_filtered(ticker, text, out_put = False)
         # predict
         predict = get_signal(text, threshold = 1.5)
         # reality
-        real = get_weekly(ticker, date_)
-        output.append((str(date_),predict,real))
+        real = get_weekly(ticker, key[date_])
+        output.append((key[date_],predict,real))
         
     return output
 
-#get_backtest('aapl', 7)
-        
+#d = get_backtest('aapl',35)
