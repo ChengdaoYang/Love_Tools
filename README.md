@@ -51,7 +51,8 @@ AAPL
 #### Methods
 - **monitor**() <br/>
 Send email to analysts at regular time. Don't forget to sleep it by calling it twice. <br/>
-This a very very awesome method, try it!  :)
+This a very very awesome method, try it!  :) <br/>
+see example.py for detail
 ``` {.sourceCode .python}
 >>> c.monitor()
 ...opening monitor function...
@@ -196,7 +197,7 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 - Our tool doesn't have a UI yet. Users will have no user experience when using our tool. This is also an important direction for us to improve our tool in the future.
 ********************
 ### Group Members
-- Yangdao Cheng
+- Chengdao Yang
 - Wansi Xie
 - Manchun Sun
 - Xiangdong Duan
