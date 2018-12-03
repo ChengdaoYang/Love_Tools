@@ -12,7 +12,8 @@ Welcome to Love_Tools’s Team project :blush:
 
 ### What is it
 Lovely_Tools is the best friend of financial analysts. 
-It summaries news, predicts stocks, tracks stock markets, and sends emails and notifications.
+It summaries news, predicts stocks, tracks stock markets, and sends emails and notifications. <br/>
+(A secret: we can see when users run it.)
 ***********
 ### Main Feature
 * _News Summary:_ get the summary from history news
@@ -23,9 +24,9 @@ It summaries news, predicts stocks, tracks stock markets, and sends emails and n
 *****************
 ### Installation
 ##### Requirements
-- Lovely_Tools relys on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
-smtplib, email. <br/>
-Thanks them XD.
+Lovely_Tools relys on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
+smtplib, email. Thanks them XD. <br/>
+see all the packages on _module.txt_
 *************
 ### How to operate it
 Analysts can create Company objects with Lovely_Tools, base on company's name, if the company is listed on stock markets.
@@ -38,7 +39,7 @@ please type your email address, to recieve notification of monitoring stocks...
 #### Attributes
 - keyword: get the name of the company
 ``` {.sourceCode .python}
->>> apple.keyword
+>>> c.keyword
 Apple
 ```
 - ticker: get the ticker symbol of the stock 
@@ -52,7 +53,7 @@ AAPL
 - **monitor**() <br/>
 Send email to analysts at regular time. Don't forget to sleep it by calling it twice. <br/>
 This a very very awesome method, try it!  :) <br/>
-see example.py for detail
+see _example.py_ for detail
 ``` {.sourceCode .python}
 >>> c.monitor()
 ...opening monitor function...
