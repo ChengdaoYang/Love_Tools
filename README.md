@@ -61,8 +61,8 @@ Send email to you at regular time. If you want This a very very awesome method, 
 Show the daily price in dataframe
 <table>
 <tr>
-    <td rowspan="4"> **Parameters**</td>
-    <td rowspan="2">**day**: </td>
+    <td rowspan="4"> Parameters</td>
+    <td rowspan="2">day: </td>
     <td>int, default 7</td>
 
 </tr>
@@ -70,7 +70,7 @@ Show the daily price in dataframe
     <td>Periods to get stock price</td>
 </tr>
 <tr>
-    <td rowspan="2">**plot**: </td>
+    <td rowspan="2">plot: </td>
     <td>boolean, default False</td>
 </tr>
 <tr>
@@ -79,7 +79,7 @@ Show the daily price in dataframe
 </table>
 <table>
 <tr>
-    <td rowspan="4"> **Return**</td>
+    <td rowspan="4"> Return</td>
     <td>Return DataFrame. Contain Highest, lowest, open, close stock price and volumn in the period
 </td>
 </tr>
