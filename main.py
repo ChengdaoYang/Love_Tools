@@ -116,7 +116,9 @@ class Company:
         import matplotlib.pyplot as plt
         if plot:
             df['Close'].plot()
+            plt.show()
             plt.savefig(f'{self.ticker}_price.png')
+            plt.close()
         return df
   
 
@@ -130,7 +132,7 @@ class Company:
     def summary(self, day=7, lines=4, plot=False, save_plot=False, out_put=False):
         return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
-    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu']):
+    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu','wansixie@hotmail.com','trihesdlin@163.com']):
         send_email(company=self, email_list=email_list) 
     def __repr__(self):
         return "<Clock {} ({})>".format(
