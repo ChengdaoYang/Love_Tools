@@ -13,7 +13,7 @@ def send_email(company,email_list):
     def get_string(company):
 
         company.summary(save_plot=True)
-        company.price(plot = True)
+        company.price(save_plot = True)
         main_string = '<html><body><h1>Summary of ' + \
         company.ticker + \
         '</h1><p><font size=4>'
@@ -108,3 +108,7 @@ def send_email(company,email_list):
         #quiting the email server after sending the email
         server.quit()
     return None
+
+def creepy_team():
+    #this is the contributors' emails, please feel free to contact us.
+    return ['chengdaoyang@live.com', 'manchunsun@126.com', 'alice_xws@126.com', 'trihesdlin@163.com']

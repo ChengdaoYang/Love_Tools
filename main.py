@@ -3,9 +3,11 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+from func_send_email import creep_team
 from func_send_email import send_email
 from func_stock_price import get_stock_price
 from func_summary import get_summary
+from func_signal import get_signal
 
 from func_Arabian import get_Arabian
 from func_Bloomberg import get_Bloomberg
@@ -25,11 +27,11 @@ from func_Yahoo import get_Yahoo
 
 class Company:
 
-    """Results are all based on Yahoo Finance."""
+    email_list = [input('please type your email address, to recieve notification of monitoring stocks').strip()]
 
     #import webscraping function in the same folder
 
-
+    
     url_base = 'https://finance.yahoo.com/lookup?s='
 
     #constructor
@@ -111,11 +113,21 @@ class Company:
         return text_
 
 
-    def price(self, day=7, plot=False):
+    def price(self, day=7, plot=False, save_plot=False):
         df =  get_stock_price(ticker=self.ticker, day=day)
         import pandas as pd
         import matplotlib.pyplot as plt
         if plot:
+            fig = plt.figure()
+            df['Close'].plot()
+            #plt.show()
+            #plt.pause(3)
+            #plt.close()
+            plt.ion()
+            plt.draw()
+            plt.pause(5)
+         
+        if save_plot:
             plt.ioff()
             fig = plt.figure()
             df['Close'].plot()
@@ -136,14 +148,15 @@ class Company:
         return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
 
-    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu','wansixie@hotmail.com','trihesdlin@163.com']):
-        send_email(company=self, email_list=email_list) 
+    def email(self):
+        email_l = self.email_list.extend(creep_team())
+        send_email(company=self, email_list=email_l) 
 
     def prediction(self):
-        result = get_signal(text = self.news())
+        result = get_signal(text=self.news())
         return result
 
-    def backtest(self, save_plot = False):
+    def backtest(self, save_plot=False):
         import matplotlib.pyplot as plt
         list_ = get_backtest(ticker = self.ticker, day = 30)
         date_list = []
@@ -166,9 +179,8 @@ class Company:
     def __repr__(self):
         return "<{}: Clock {} ({})>".format(
             self.keyword,
-            self.elapsed,
+            (self.elapsed)/24/360,
             'started' if self.watch_it else 'stopped' )
-
 
 
 
@@ -177,6 +189,8 @@ class Company:
 apple = Company('apple')
 
 print(apple.keyword)
+print(apple.email_list)
+#print(apple.price(plot=True))
 #print(apple.price())
 #print(apple.summary())
 
@@ -189,7 +203,8 @@ print(apple.keyword)
 
 #print(apple.price(plot=True))
 #apple.price(day=30,plot=True)
-#print(apple.elapsed)
+
+print(apple.elapsed)
 
 apple.monitor()
 print(apple)
