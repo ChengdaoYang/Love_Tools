@@ -115,6 +115,7 @@ Get all news of the stock.
 </td>
 </tr>
 </table>
+
 ``` {.sourceCode .python}
 >>> mynews = c.news(day=30)
 >>> print(mynews)
@@ -157,6 +158,7 @@ Summary the news to the specific most important lines.
     <td>If True, save summary to relative environment. </td>
 </tr>
 </table>
+
 ``` {.sourceCode .python}
 >>> mysummary = c.summary(day=7, lines=2)
 >>> print(mysummary)
@@ -186,6 +188,7 @@ Get a backtest plot in your folder, the name of which is *{Company_name}_backtes
     <td>If True, save histogram to relative environment.</td>
 </tr>
 </table>
+
 ``` {.sourceCode .python}
 >>> c.backtest(save_plot=True)
 ...save a picture to Apple_backtest.png...
