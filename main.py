@@ -80,6 +80,7 @@ class Company:
             diff = (datetime.datetime.utcnow() - self.watch_it)
             time_elapsed = int(self.counter.total_seconds())+int(diff.total_seconds())
             if time_elapsed%2 == 0:
+                self.email()
                 print('send email')
             return time_elapsed
         return self.counter
@@ -115,10 +116,11 @@ class Company:
         import pandas as pd
         import matplotlib.pyplot as plt
         if plot:
+            plt.ioff()
+            fig = plt.figure()
             df['Close'].plot()
-            plt.show()
             plt.savefig(f'{self.ticker}_price.png')
-            plt.close()
+            plt.close(fig)
         return df
   
 
