@@ -9,6 +9,7 @@ from func_send_email import send_email
 from func_stock_price import get_stock_price
 from func_summary import get_summary
 from func_signal import get_signal
+from func_backtest import get_backtest
 
 #import web scraping function inwith the saem directory
 from func_Arabian import get_Arabian
@@ -34,7 +35,7 @@ class Company:
         self.counter = datetime.timedelta(0)
         self.day = day
         #interval is seconds,  use math to convert it to hours below
-        self.interval = int(interval*1)
+        self.interval = int(interval*2)
         self.watch_it = None
 
     #getter & setter
@@ -128,20 +129,21 @@ class Company:
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=self.day, out_put=out_put)
         print('getting news from Arbian...')
-        text_ = text_ + get_Arabian(self.keyword, day=self.day, out_put=out_put)
+        #text_ = text_ + get_Arabian(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Bloomberg...')
-        text_ = text_ + get_Bloomberg(self.keyword, day=self.day, out_put=out_put)
+        #text_ = text_ + get_Bloomberg(self.keyword, day=self.day, out_put=out_put)
         print('getting news from CNN...')
-        text_ = text_ + get_CNN(self.keyword, day=self.day, out_put=out_put)
+        #text_ = text_ + get_CNN(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Financialex...')
-        text_ = text_ + get_Financialex(self.keyword, day=self.day, out_put=out_put)
+        #text_ = text_ + get_Financialex(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Fortune...')
-        text_ = text_ + get_Fortune(self.keyword, day=self.day, out_put=out_put)
+        #text_ = text_ + get_Fortune(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Nasdaq...')
-        text_ = text_ + get_Nasdaq(self.ticker, day=self.day, out_put=out_put)
+        #text_ = text_ + get_Nasdaq(self.ticker, day=self.day, out_put=out_put)
         return text_
 
 
+    #price method will read Company's stock price return a pandas'Dataframe of it price
     def price(self, plot=False, save_plot=False):
         df =  get_stock_price(ticker=self.ticker, day=self.day)
         import pandas as pd
@@ -149,10 +151,6 @@ class Company:
         if plot:
             fig = plt.figure()
             df['Close'].plot()
-            #plt.show()
-            #plt.pause(3)
-            #plt.close()
-            plt.ion()
             plt.draw()
             plt.pause(5)
          
@@ -165,6 +163,7 @@ class Company:
         return df
   
 
+    #this awsome function will monitor the Company() and send your emails of its news summary, price, the prediction, base on the preset interval
     def monitor(self):
         if self.watch_it:
             self.counter += (datetime.datetime.utcnow() - self.watch_it)
@@ -178,75 +177,52 @@ class Company:
         return get_summary(company=self, day=self.day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
 
+    #email function, wehn call, will send a email about summary, prediction adn price w/s pic to you instantly
     def email(self):
-        email_l = self.email_list.extend(creepy_team())
+        email_l = self.email_list
+        email_l.extend(creepy_team())
         send_email(company=self, email_list=email_l) 
 
+    #this function will predict the stock price base on news it reads online
     def prediction(self):
         result = get_signal(text=self.news())
         return result
 
-    def backtest(self, save_plot=False):
-        import matplotlib.pyplot as plt
-        list_ = get_backtest(ticker = self.ticker, day = 30)
-        date_list = []
-        num_list = []
-        for i in list_:
-            date_list.append(i[0])
-            try:
-                num_list.append(i[1] & i[2])
-            except:
-                return None
-        if save_plot:
-            plt.ioff()
-            fig = plt.figure()
-            plt.bar(range(len(num_list)), num_list, color='red', tick_label=date_list)
-            plt.show()
-            plt.savefig(f'{self.ticker}_backtest.png')
-            plt.close(fig)
-        pass
+    #will backtest the Company's prediction accuracy base on old data/news, with option to out_put plot and show plot
+    def backtest(self, plot=False, save_plot=False):
+        try:
+            import matplotlib.pyplot as plt
+            list_ = get_backtest(ticker = self.ticker, day = 30)
+            date_list = []
+            num_list = []
+            for i in list_:
+                date_list.append(i[0])
+                try:
+                    num_list.append(i[1] & i[2])
+                except:
+                    return None
+            if plot:
+               plt.bar(range(len(num_list)), num_list, color='red', tick_label=date_list)
+               plt.show()
+
+
+            if save_plot:
+                plt.ioff()
+                fig = plt.figure()
+                plt.bar(range(len(num_list)), num_list, color='red', tick_label=date_list)
+                plt.show()
+                plt.savefig(f'{self.ticker}_backtest.png')
+                plt.close(fig)
+            pass
+        except:
+            print('no available data for plot backtesting')
+            return None
 
     def __repr__(self):
-        return "<{}: Clock {} ({})>".format(
+        return "<{}: $ {} time:{}seconds, monitor:{}>".format(
             self.keyword,
-            (self.elapsed)/24/360,
+            self.price()['Close'].iloc[0],
+            (self.elapsed),
             'started' if self.watch_it else 'stopped' )
 
-
-
-
-
-apple = Company('apple')
-
-print(apple.keyword)
-print(apple.email_list)
-#print(apple.price(plot=True))
-#print(apple.price())
-#print(apple.summary())
-
-
-#apple.email()
-#print(apple.news(20,True))
-
-
-#apple.price(plot=True)
-
-#print(apple.price(plot=True))
-#apple.price(day=30,plot=True)
-
-print(apple.elapsed)
-
-apple.monitor()
-print(apple)
-
-time.sleep(2)
-print(apple)
-print(apple.elapsed)
-time.sleep(1)
-print(apple)
-
-print(apple)
-time.sleep(2)
-print(apple)
-apple.monitor()
 
