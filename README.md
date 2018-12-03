@@ -201,3 +201,4 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 - Manchun Sun
 - Xiangdong Duan
 ****************
+see example.py for detail
