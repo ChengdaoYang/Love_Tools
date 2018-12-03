@@ -25,14 +25,12 @@ class Company:
 
     #import webscraping function in the same folder
 
-    
-    url_base = 'https://finance.yahoo.com/lookup?s='
-
     #constructor
-    def __init__(self,keyword, is_email=False):
+    def __init__(self,keyword, is_email=False, day=7):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
         self.counter = datetime.timedelta(0)
+        self.day = day
         self.watch_it = None
 
     #getter & setter
@@ -61,6 +59,13 @@ class Company:
     def watch_it(self, x):
         self._watch_it = x
 
+    @property
+    def day(self):
+        return self._day
+    @day.setter
+    def day(self,x):
+        self._day = x
+
             
     @property
     def counter(self):
@@ -84,7 +89,8 @@ class Company:
     #class methods:
     #Ticker function will get the ticker from Yahoo base on company name
     def ticker(self,keyword):
-        response = requests.get(self.url_base + keyword)
+        url_base = 'https://finance.yahoo.com/lookup?s='
+        response = requests.get(url_base + keyword)
         results_pages = BeautifulSoup(response.content)
         all_aim_td_tags = results_pages.find_all('td',{'class':'data-col0 Ta(start) Pstart(6px) Pend(15px)'})
         if all_aim_td_tags == []:
@@ -94,27 +100,27 @@ class Company:
 
     
     #News function get all news article from Yahoo, CNN ,Fortune, Bloomber.. and return a long str contains all.
-    def news(self, day=7, out_put=False):
+    def news(self, out_put=False):
         print('getting news form Yahoo...')
         text_ = ''
-        text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
+        text_ = get_Yahoo(self.ticker, day=self.day, out_put=out_put)
         print('getting news from Arbian...')
-        text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Arabian(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Bloomberg...')
-        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Bloomberg(self.keyword, day=self.day, out_put=out_put)
         print('getting news from CNN...')
-        text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_CNN(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Financialex...')
-        text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Financialex(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Fortune...')
-        text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
+        text_ = text_ + get_Fortune(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Nasdaq...')
-        text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
+        text_ = text_ + get_Nasdaq(self.ticker, day=self.day, out_put=out_put)
         return text_
 
 
-    def price(self, day=7, plot=False, save_plot=False):
-        df =  get_stock_price(ticker=self.ticker, day=day)
+    def price(self, plot=False, save_plot=False):
+        df =  get_stock_price(ticker=self.ticker, day=self.day)
         import pandas as pd
         import matplotlib.pyplot as plt
         if plot:
@@ -142,10 +148,11 @@ class Company:
             self.watch_it = False
         else:
             self.watch_it = datetime.datetime.utcnow()
+
       
 
-    def summary(self, day=7, lines=4, plot=False, save_plot=False, out_put=False):
-        return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
+    def summary(self, lines=4, plot=False, save_plot=False, out_put=False):
+        return get_summary(company=self, day=self.day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
 
     def email(self):
