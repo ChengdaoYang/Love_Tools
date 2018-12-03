@@ -98,6 +98,7 @@ class Company:
         self._counter = x        
  
 
+    #elapsed will allow the Compnay() to recorde time and triggle send email base on preset interval
     @property
     def elapsed(self):
         if self.watch_it:
@@ -129,17 +130,17 @@ class Company:
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=self.day, out_put=out_put)
         print('getting news from Arbian...')
-        #text_ = text_ + get_Arabian(self.keyword, day=self.day, out_put=out_put)
+        text_ = text_ + get_Arabian(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Bloomberg...')
-        #text_ = text_ + get_Bloomberg(self.keyword, day=self.day, out_put=out_put)
+        text_ = text_ + get_Bloomberg(self.keyword, day=self.day, out_put=out_put)
         print('getting news from CNN...')
-        #text_ = text_ + get_CNN(self.keyword, day=self.day, out_put=out_put)
+        text_ = text_ + get_CNN(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Financialex...')
-        #text_ = text_ + get_Financialex(self.keyword, day=self.day, out_put=out_put)
+        text_ = text_ + get_Financialex(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Fortune...')
-        #text_ = text_ + get_Fortune(self.keyword, day=self.day, out_put=out_put)
+        text_ = text_ + get_Fortune(self.keyword, day=self.day, out_put=out_put)
         print('getting news from Nasdaq...')
-        #text_ = text_ + get_Nasdaq(self.ticker, day=self.day, out_put=out_put)
+        text_ = text_ + get_Nasdaq(self.ticker, day=self.day, out_put=out_put)
         return text_
 
 
@@ -173,6 +174,7 @@ class Company:
 
       
 
+    #will summary the news to 4 line or set user need
     def summary(self, lines=4, plot=False, save_plot=False, out_put=False):
         return get_summary(company=self, day=self.day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
@@ -218,6 +220,7 @@ class Company:
             print('no available data for plot backtesting')
             return None
 
+    #repr is tailored to use in moniotr
     def __repr__(self):
         return "<{}: $ {} time:{}seconds, monitor:{}>".format(
             self.keyword,
