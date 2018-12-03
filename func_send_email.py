@@ -4,6 +4,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.utils import parseaddr, formataddr
+import time
+import re
+import smtplib
 
 def send_email(company,email_list):
 
@@ -11,43 +14,39 @@ def send_email(company,email_list):
 
         company.summary(save_plot=True)
         company.price(plot = True)
-        main_string = """
-        <html>
-        <body>
-        <h1>Summary</h1>
-        <p>
-        <font size=5 color="sky blue">"""
+        main_string = '<html><body><h1>Summary of ' + \
+        company.ticker + \
+        '</h1><p><font size=4>'
 
         #function to create html string format for nice looking email
-        main_string = main_string + company.ticker + \
-                      '</font>\n<br /><br />\n<font size=4>' + \
-                      'This is the summary of ' + company.ticker + \
-                      '</font>\n<br />\n<font size=4>' + \
-                      company.summary + \
+        main_string = main_string + \
+                      'This is the summary of </font><font size=4 color="sky blue">' + company.ticker + \
+                      '</font><font size=4>:</font>\n<br />\n<font size=4>' + \
+                      company.summary() + \
                       '</font>\n<br /><br />\n' + \
                       '<img src="cid:' + \
                       '0' + \
                       '" width="60%">\n<br /><br />\n' + \
                       '<font size=4>' + \
-                      'The latest prices of ' + company.ticker + ' are:' + \
+                      'The latest prices of </font><font size=4 color="sky blue">' + company.ticker + '</font><font size=4> are:' + \
                       '</font>\n<br />\n<font size=4>' + \
-                      'Opening Price: ' + str(round(company.price(plot = True)['Open'].values[0],2)) + \
+                      'Opening Price: ' + str(round(company.price()['Open'].values[0],2)) + \
                       '</font>\n<br />\n<font size=4>' + \
-                      'Closing Price: ' + str(round(company.price(plot = True)['Close'].values[0],2)) + \
+                      'Closing Price: ' + str(round(company.price()['Close'].values[0],2)) + \
                       '</font>\n<br />\n<font size=4>' + \
-                      'Highest Price: ' + str(round(company.price(plot = True)['High'].values[0],2)) + \
+                      'Highest Price: ' + str(round(company.price()['High'].values[0],2)) + \
                       '</font>\n<br />\n<font size=4>' + \
-                      'Lowest Price: ' + str(round(company.price(plot = True)['Low'].values[0],2)) + \
-                      '</font>\n<br /><br />\n<img class="' + \
+                      'Lowest Price: ' + str(round(company.price()['Low'].values[0],2)) + \
+                      '</font>\n<br /><br />\n' + \
+                      '<font size=4>This is the plot of Closing Price:</font>\n<br /><br />\n' + \
+                      '<img class="' + \
                       company.ticker + \
-                      '" src="cid:' + \
-                      '1' + \
-                      '" width="60%">\n<br /><br />\n<font size=5 color="sky blue">'
+                      '" src="cid:1" width="60%">\n<br /><br />\n<font size=5 color="sky blue">'
         main_string = main_string + '\n</p>\n</div>\n</body>\n</html>\n'
         print(main_string)
         time.sleep(5)
         return main_string
-    
+
     text = get_string(company)
     #formmating
     def _format_addr(s):
@@ -104,5 +103,3 @@ def send_email(company,email_list):
         #quiting the email server after sending the email
         server.quit()
     return None
-
-

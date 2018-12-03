@@ -134,7 +134,7 @@ class Company:
         return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
 
-    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu']):
+    def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu','wansixie@hotmail.com','trihesdlin@163.com']):
         send_email(company=self, email_list=email_list) 
 
 
