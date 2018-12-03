@@ -116,7 +116,9 @@ class Company:
         import matplotlib.pyplot as plt
         if plot:
             df['Close'].plot()
+            plt.show()
             plt.savefig(f'{self.ticker}_price.png')
+            plt.close()
         return df
   
 
@@ -127,13 +129,18 @@ class Company:
         else:
             self.watch_it = datetime.datetime.utcnow()
       
+
     def summary(self, day=7, lines=4, plot=False, save_plot=False, out_put=False):
         return get_summary(company=self, day=day, lines=lines, plot=plot, save_plot=save_plot, out_put=out_put)
 
+
     def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu']):
         send_email(company=self, email_list=email_list) 
+
+
     def __repr__(self):
-        return "<Clock {} ({})>".format(
+        return "<{}: Clock {} ({})>".format(
+            self.keyword,
             self.elapsed,
             'started' if self.watch_it else 'stopped' )
 
@@ -145,7 +152,11 @@ class Company:
 apple = Company('apple')
 
 print(apple.keyword)
-apple.email()
+#print(apple.price())
+#print(apple.summary())
+
+
+#apple.email()
 #print(apple.news(20,True))
 
 
@@ -155,17 +166,17 @@ apple.email()
 #apple.price(day=30,plot=True)
 #print(apple.elapsed)
 
-#apple.monitor()
-#print(apple)
-#
-#time.sleep(2)
-#print(apple)
-#print(apple.elapsed)
-#time.sleep(1)
-#print(apple)
-#
-#print(apple)
-#time.sleep(2)
-#print(apple)
-#apple.monitor()
+apple.monitor()
+print(apple)
+
+time.sleep(2)
+print(apple)
+print(apple.elapsed)
+time.sleep(1)
+print(apple)
+
+print(apple)
+time.sleep(2)
+print(apple)
+apple.monitor()
 
