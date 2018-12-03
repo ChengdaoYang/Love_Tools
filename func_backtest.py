@@ -89,6 +89,18 @@ def get_backtest(ticker, day):
         output.append(str(date_),predict,real)
         
     return output
+
+def plot_bar():
+    import matplotlib.pyplot as plt
+    list_ = get_backtest('aapl', 7)
+    date_list = []
+    num_list = []
+    for i in list_:
+        date_list.append(i[0]) 
+        num_list.append(i[1] & i[2])
+    plt.bar(range(len(num_list)), num_list,color='red',tick_label=date_list)
+    plt.show()
+    pass
 #get_backtest('aapl', 7)
         
 
