@@ -71,7 +71,7 @@ def send_email(company,email_list):
         msg = MIMEMultipart()
         msg['From'] = _format_addr('Love_tools Group')
         msg['To'] = _format_addr('Recipient <%s>' % to_addr)
-        msg['Subject'] = Header('Test text~~~', 'utf-8').encode()
+        msg['Subject'] = Header('Summary of ' + company.ticker, 'utf-8').encode()
 
         #adding attachment
         msg.attach(MIMEText(text, 'html', 'utf-8'))
