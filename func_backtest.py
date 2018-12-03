@@ -1,6 +1,5 @@
 
 from func_signal import get_signal 
-from func_daily_news import get_daily_news
 from func_filter import get_filtered
 
 import datetime

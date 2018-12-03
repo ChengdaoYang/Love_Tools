@@ -44,6 +44,8 @@ def get_signal(text, threshold = 1.5):
                 pos+=1
             if word in negative_words:
                 neg+=1
+        if number == 0:
+            return 0,0
         return pos/number*100,neg/number*100
     
 #Input stock news --> string
