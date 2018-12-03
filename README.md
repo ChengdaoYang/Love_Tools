@@ -2,11 +2,11 @@ Welcome to Love_Tools’s Team project :blush:
 ===================================
 ![Our Team](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/Team_Pic.png "Our Team")
 ===================================
-##Lovely_Tools Repository
-* [What is it?](#What-is-it?)
+## Lovely_Tools Repository
+* [What is it](#What-is-it)
 * [Main Feature](#Main-Feature)
 * [Installation](#Installation)
-* [How to operate it?](#How-to-operate-it?)
+* [How to operate it](#How-to-operate-it)
 * [Further Developments](#Further-Developments)
 * [Group Members](#Group-Members)
 
@@ -27,7 +27,7 @@ It summaries news, predicts stocks, tracks stock markets, and sends emails and n
 smtplib, email, <br/>
 Thanks them XD.
 *************
-### How to operate it?
+### How to operate it
 Analysts can create Company objects with Lovely_Tools, base on company's name, if the company is listed on stock markets.
 Then they can simply call its method and attributes.<br/>
 Fistly, create an instance and enter  you email address:
@@ -106,13 +106,6 @@ Get all news of the stock.
 </tr>
 <tr>
     <td>If True, save stock news to relative environment. </td>
-</tr>
-</table>
-<table>
-<tr>
-    <td rowspan="4"> Return</td>
-    <td>Return string. Stock news.
-</td>
 </tr>
 </table>
 
