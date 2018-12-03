@@ -25,7 +25,7 @@ from func_filter import get_filtered
 
 #summary return a summay of all news on scraped of a company, with option of plot and/or save the word cloud image
 def get_summary(company, day=7, lines = 4, plot = False, save_plot=False, out_put = False):
-    text = company.news(day=day)
+    text = company.news()
     # key: the original sentences. value: the lowercase version of the sentences
     new_sentences = {}
     # key: the original sentences. value: the sum of the frequencies of each word in the sentence

@@ -3,12 +3,14 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+#import class method in the same folder
 from func_send_email import creepy_team
 from func_send_email import send_email
 from func_stock_price import get_stock_price
 from func_summary import get_summary
 from func_signal import get_signal
 
+#import web scraping function inwith the saem directory
 from func_Arabian import get_Arabian
 from func_Bloomberg import get_Bloomberg
 from func_CNN import get_CNN
@@ -20,17 +22,19 @@ from func_Yahoo import get_Yahoo
 
 
 class Company:
+    '''Company object will help you do financial analyse, if you have internet'''
 
+    #user_email:  (single user for now)
     email_list = [input('please type your email address, to recieve notification of monitoring stocks\n').strip()]
 
-    #import webscraping function in the same folder
-
     #constructor
-    def __init__(self,keyword, is_email=False, day=7):
+    def __init__(self,keyword, is_email=False, day=7, interval=2):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
         self.counter = datetime.timedelta(0)
         self.day = day
+        #interval is seconds,  use math to convert it to hours below
+        self.interval = int(interval*1)
         self.watch_it = None
 
     #getter & setter
@@ -52,34 +56,53 @@ class Company:
         t = self.ticker(keyword)
         self._ticker = t
 
+
     @property
     def watch_it(self):
         return self._watch_it
+
     @watch_it.setter
     def watch_it(self, x):
         self._watch_it = x
 
+
     @property
     def day(self):
         return self._day
+
     @day.setter
     def day(self,x):
+        if x <= 0:
+            raise ValueError('day must be positive, bro!')
         self._day = x
 
+
+    @property
+    def interval(self):
+        return self._interval
+
+    @interval.setter
+    def interval(self, x):
+        if x < 0:
+            raise ValueError('interval cannot be negative')
+        self._interval = x
             
+
     @property
     def counter(self):
         return self._counter
+
     @counter.setter
     def counter(self, x):
         self._counter = x        
  
+
     @property
     def elapsed(self):
         if self.watch_it:
             diff = (datetime.datetime.utcnow() - self.watch_it)
             time_elapsed = int(self.counter.total_seconds())+int(diff.total_seconds())
-            if time_elapsed%2 == 0:
+            if time_elapsed%self.interval == 0:
                 self.email()
                 print('send email')
             return time_elapsed
