@@ -23,14 +23,14 @@ It summaries news, predicts stocks, tracks stock markets, and sends emails and n
 *****************
 ### Installation
 ##### Requirements
-- Lovely_Tools rels on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
-smtplib, email, <br/>
+- Lovely_Tools relys on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
+smtplib, email. <br/>
 Thanks them XD.
 *************
 ### How to operate it
 Analysts can create Company objects with Lovely_Tools, base on company's name, if the company is listed on stock markets.
 Then they can simply call its method and attributes.<br/>
-Fistly, create an instance and enter  you email address:
+Fistly, create an instance and enter your email address:
 ``` {.sourceCode .python}
 >>> c = Company('apple')
 please type your email address, to recieve notification of monitoring stocks...
@@ -38,10 +38,11 @@ please type your email address, to recieve notification of monitoring stocks...
 #### Attributes
 - keyword: get the name of the company
 ``` {.sourceCode .python}
->>> apple.keword
+>>> apple.keyword
 Apple
 ```
-- ticker: get the ticker symbol of the stock
+- ticker: get the ticker symbol of the stock 
+(from Yahoo website)
 
 ``` {.sourceCode .python}
 >>> c.ticker
@@ -49,16 +50,16 @@ AAPL
 ```
 #### Methods
 - **monitor**() <br/>
-Send email to you at regular time. If you want This a very very awesome method, try it!  :)
+Send email to analysts at regular time. Don't forget to sleep it by calling it twice. <br/>
+This a very very awesome method, try it!  :)
 ``` {.sourceCode .python}
 >>> c.monitor()
 ...opening monitor function...
 >>> c.monitor()
 ...closing monitor fucntion...
-
 ```
 - **price**(_day=7, plot=False_)<br/>
-Show the daily price in dataframe
+Show the daily price in dataframe.
 <table>
 <tr>
     <td rowspan="4"> Parameters</td>
@@ -89,7 +90,7 @@ Show the daily price in dataframe
 >>> c.price(day=30, plot=True)
 ```
 - **news**(_day=7, out_put=False_)<br/>
-Get all news of the stock.
+Get all news of the stocks during a specific period.
 <table>
 <tr>
     <td rowspan="4">Parameters</td>
@@ -118,7 +119,7 @@ past three months, which has had the unfortunate effect of erasing nearly all of
 ...
 ```
 - **summary**(_day=7, lines=4, plot=False, save_plot=False, out_put=False_)<br/>
-Summary the news to the specific most important lines.
+Summary the news and draw a word cloud picture.
 <table>
 <tr>
     <td rowspan="8">Parameters</td>
@@ -164,12 +165,13 @@ Send an email with news summary, stock price, price line chart and sentiment ana
 Start sending email...
 ```
 - **predict**() <br/>
-Give a number to show the trend of the stock according to the news.
+Read recent news and predict the stock trend in the future.<br/>
+Output: _1_ the price may go up. _0_ the price may be stable. _-1_ the price may go down.
 ``` {.sourceCode .python}
 >>> c.predict()
 ```
 - **backtest**(_save_plot=False_) <br/>
-Get a backtest plot in your folder, the name of which is *{Company_name}_backtest.png*.
+Save a backtest plot to relative environment, the name of which is *{Company_name}_backtest.png*.
 <table>
 <tr>
     <td rowspan="2">Parameters</td>
