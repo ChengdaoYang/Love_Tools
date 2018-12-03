@@ -86,9 +86,6 @@ def get_backtest(ticker, day):
         predict = get_signal(text, threshold = 1.5)
         # reality
         real = get_weekly(ticker, date_)
-        output.append(str(date_),predict,real)
+        output.append((str(date_),predict,real))
         
     return output
-#get_backtest('aapl', 7)
-        
-

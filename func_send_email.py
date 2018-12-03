@@ -41,7 +41,12 @@ def send_email(company,email_list):
                       '<font size=4>This is the plot of Closing Price:</font>\n<br /><br />\n' + \
                       '<img class="' + \
                       company.ticker + \
-                      '" src="cid:1" width="60%">\n<br /><br />\n<font size=5 color="sky blue">'
+                      '" src="cid:1" width="60%">\n<br /><br />\n'
+        if company.prediction() == 1:
+            main_string = main_string + '<font size=6 color="red">Prediction: The price of ' + company.ticker + ' may go up!</font>\n<br /><br />\n'
+        elif company.prediction() == -1:
+            main_string = main_string + '<font size=6 color="red">Prediction: The price of ' + company.ticker + ' may go down!</font>\n<br /><br />\n'
+
         main_string = main_string + '\n</p>\n</div>\n</body>\n</html>\n'
         print(main_string)
         time.sleep(5)

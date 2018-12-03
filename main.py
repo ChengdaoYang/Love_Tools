@@ -139,6 +139,29 @@ class Company:
     def email(self, email_list=['chengdaoyang@live.com','ms5705@columbia.edu','wansixie@hotmail.com','trihesdlin@163.com']):
         send_email(company=self, email_list=email_list) 
 
+    def prediction(self):
+        result = get_signal(text = self.news())
+        return result
+
+    def backtest(self, save_plot = False):
+        import matplotlib.pyplot as plt
+        list_ = get_backtest(ticker = self.ticker, day = 30)
+        date_list = []
+        num_list = []
+        for i in list_:
+            date_list.append(i[0])
+            try:
+                num_list.append(i[1] & i[2])
+            except:
+                return None
+        if save_plot:
+            plt.ioff()
+            fig = plt.figure()
+            plt.bar(range(len(num_list)), num_list, color='red', tick_label=date_list)
+            plt.show()
+            plt.savefig(f'{self.ticker}_backtest.png')
+            plt.close(fig)
+        pass
 
     def __repr__(self):
         return "<{}: Clock {} ({})>".format(
