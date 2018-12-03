@@ -89,3 +89,6 @@ def get_backtest(ticker, day):
         output.append((str(date_),predict,real))
         
     return output
+
+#get_backtest('aapl', 7)
+        
