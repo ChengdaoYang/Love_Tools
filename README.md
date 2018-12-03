@@ -59,6 +59,32 @@ Send email to you at regular time. If you want This a very very awesome method, 
 ```
 - **price**(_day=7, plot=False_)<br/>
 Show the daily price in dataframe
+<table>
+<tr>
+    <td rowspan="4"> **Parameters**</td>
+    <td rowspan="2">**day**: </td>
+    <td>int, default 7</td>
+
+</tr>
+<tr>
+    <td>Periods to get stock price</td>
+</tr>
+<tr>
+    <td rowspan="2">**plot**: </td>
+    <td>boolean, default False</td>
+</tr>
+<tr>
+    <td>If True, save stock price line plot to relative environment. </td>
+</tr>
+</table>
+<table>
+<tr>
+    <td rowspan="4"> **Return**</td>
+    <td>Return DataFrame. Contain Highest, lowest, open, close stock price and volumn in the period
+</td>
+</tr>
+</table>
+
 ``` {.sourceCode .python}
 >>> c.price(day=30, plot=True)
 ```
