@@ -90,6 +90,31 @@ Show the daily price in dataframe
 ```
 - **news**(_day=7, out_put=False_)<br/>
 Get all news of the stock.
+<table>
+<tr>
+    <td rowspan="4">Parameters</td>
+    <td rowspan="2">day: </td>
+    <td>int, default 7</td>
+
+</tr>
+<tr>
+    <td>Periods to scrape web</td>
+</tr>
+<tr>
+    <td rowspan="2">plot: </td>
+    <td>boolean, default False</td>
+</tr>
+<tr>
+    <td>If True, save stock news to relative environment. </td>
+</tr>
+</table>
+<table>
+<tr>
+    <td rowspan="4"> Return</td>
+    <td>Return string. Stock news.
+</td>
+</tr>
+</table>
 ``` {.sourceCode .python}
 >>> mynews = c.news(day=30)
 >>> print(mynews)
@@ -100,6 +125,38 @@ past three months, which has had the unfortunate effect of erasing nearly all of
 ```
 - **summary**(_day=7, lines=4, plot=False, save_plot=False, out_put=False_)<br/>
 Summary the news to the specific most important lines.
+<table>
+<tr>
+    <td rowspan="8">Parameters</td>
+    <td rowspan="2">lines: </td>
+    <td>int, default 4</td>
+
+</tr>
+<tr>
+    <td>Lines in summary</td>
+</tr>
+<tr>
+    <td rowspan="2">plot: </td>
+    <td>boolean, default False</td>
+</tr>
+<tr>
+    <td>If True, plot word cloud image. </td>
+</tr>
+<tr>
+    <td rowspan="2">save_plot: </td>
+    <td>boolean, default False</td>
+</tr>
+<tr>
+    <td>If True, save word cloud image to relative environment. </td>
+</tr>
+<tr>
+    <td rowspan="2">out_put: </td>
+    <td>boolean, default False</td>
+</tr>
+<tr>
+    <td>If True, save summary to relative environment. </td>
+</tr>
+</table>
 ``` {.sourceCode .python}
 >>> mysummary = c.summary(day=7, lines=2)
 >>> print(mysummary)
@@ -118,6 +175,17 @@ Give a number to show the trend of the stock according to the news.
 ```
 - **backtest**(_save_plot=False_) <br/>
 Get a backtest plot in your folder, the name of which is *{Company_name}_backtest.png*.
+<table>
+<tr>
+    <td rowspan="2">Parameters</td>
+    <td rowspan="2">save_plot: </td>
+    <td>boolean, default False</td>
+
+</tr>
+<tr>
+    <td>If True, save histogram to relative environment.</td>
+</tr>
+</table>
 ``` {.sourceCode .python}
 >>> c.backtest(save_plot=True)
 ...save a picture to Apple_backtest.png...
