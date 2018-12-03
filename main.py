@@ -3,7 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-from func_send_email import creep_team
+from func_send_email import creepy_team
 from func_send_email import send_email
 from func_stock_price import get_stock_price
 from func_summary import get_summary
@@ -18,16 +18,10 @@ from func_Nasdaq import get_Nasdaq
 from func_Yahoo import get_Yahoo
 
 
-#AAPL_result.txt			func_CNN.py			func_Yahoo.py			list_of_web.ipynb
-#CNN_selenium_scraping_yang.py	func_Eight_emotion.py		func_filter.py			main.py
-#__pycache__			func_Financialex.py		func_pos_neg.py			module.txt
-#func_Arabian.py			func_Fortune.py			func_stock_price.py
-#func_Bloomberg.py		func_Nasdaq.py			func_word_cloud.py
-
 
 class Company:
 
-    email_list = [input('please type your email address, to recieve notification of monitoring stocks').strip()]
+    email_list = [input('please type your email address, to recieve notification of monitoring stocks\n').strip()]
 
     #import webscraping function in the same folder
 
@@ -38,7 +32,6 @@ class Company:
     def __init__(self,keyword, is_email=False):
         self.keyword = keyword
         self.ticker = self.ticker(keyword)
-        self.is_email = is_email
         self.counter = datetime.timedelta(0)
         self.watch_it = None
 
@@ -102,14 +95,21 @@ class Company:
     
     #News function get all news article from Yahoo, CNN ,Fortune, Bloomber.. and return a long str contains all.
     def news(self, day=7, out_put=False):
+        print('getting news form Yahoo...')
         text_ = ''
         text_ = get_Yahoo(self.ticker, day=day, out_put=out_put)
-        #text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
-        #text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
+        print('getting news from Arbian...')
+        text_ = text_ + get_Arabian(self.keyword, day=day, out_put=out_put)
+        print('getting news from Bloomberg...')
+        text_ = text_ + get_Bloomberg(self.keyword, day=day, out_put=out_put)
+        print('getting news from CNN...')
+        text_ = text_ + get_CNN(self.keyword, day=day, out_put=out_put)
+        print('getting news from Financialex...')
+        text_ = text_ + get_Financialex(self.keyword, day=day, out_put=out_put)
+        print('getting news from Fortune...')
+        text_ = text_ + get_Fortune(self.keyword, day=day, out_put=out_put)
+        print('getting news from Nasdaq...')
+        text_ = text_ + get_Nasdaq(self.ticker, day=day, out_put=out_put)
         return text_
 
 
@@ -149,7 +149,7 @@ class Company:
 
 
     def email(self):
-        email_l = self.email_list.extend(creep_team())
+        email_l = self.email_list.extend(creepy_team())
         send_email(company=self, email_list=email_l) 
 
     def prediction(self):
