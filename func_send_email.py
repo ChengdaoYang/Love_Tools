@@ -63,7 +63,7 @@ def send_email(company,email_list):
     password = 'welovepaul2018'
 
     pic_list = re.findall(r'img class\=\"[a-zA-z0-9-]+',text)
-    test = pic_list[0][11:]
+    print('Start sending email...')
 
     #loop to send emails to multiple users
     for to_addr in email_list:
