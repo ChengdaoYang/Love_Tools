@@ -35,7 +35,7 @@ Fistly, create an instance and enter  you email address:
 >>> c = Company('apple')
 please type your email address, to recieve notification of monitoring stocks...
 ```
-####Attributes
+#### Attributes
 - keyword: get the name of the company
 ``` {.sourceCode .python}
 >>> apple.keword
@@ -47,7 +47,7 @@ Apple
 >>> c.ticker
 AAPL
 ```
-####Methods
+#### Methods
 - **monitor**() <br/>
 Send email to you at regular time. If you want This a very very awesome method, try it!  :)
 ``` {.sourceCode .python}
