@@ -1,7 +1,7 @@
 import time
 import main
 
-apple = Company('apple')
+apple = main.Company('google')
 print('Ticker: ', apple.ticker)
 print('Keyword: ', apple.keyword)
 print('The latest Closing price: ', round(apple.price()['Close'].values[0],2))
