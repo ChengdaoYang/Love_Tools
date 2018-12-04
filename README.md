@@ -29,7 +29,7 @@ It reads new on Internet (_such as Bloomberg, CNN, Yahoo Finance, Nasdaq and so 
 ##### Requirements
 Lovely_Tools relys on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
 smtplib, email. Thanks them XD. <br/>
-see details on _module.txt_ _requirement.txt_
+(_requirement.txt_)
 
 *************
 ### How to operate it
@@ -96,7 +96,7 @@ Show the daily price in dataframe.
 >>> c.price(day=30, plot=True)
 ```
 - **news**(_day=7, out_put=False_)<br/>
-Get all news of the stocks from major financial websites during a specific period.
+Get all news of the stocks from major financial websites during a specific period. This function takes sometime. Please wait for five minutes.
 <table>
 <tr>
     <td rowspan="4">Parameters</td>
@@ -166,6 +166,7 @@ In fact, for the fourth quarter of fiscal 2018, Apple's average selling price (A
 ```
 - **email**()<br/>
 Send an email with news summary, stock price, price line chart and sentiment analysis.
+<br/>_see on samples_
 ``` {.sourceCode .python}
 >>> c.email()
 Start sending email...
@@ -196,7 +197,7 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 ```
 *****************
 ### Sample
-
+Below is a sample of the email sent.<br/>
 <img width="200" height="200" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_1.JPG"/><br/>
 <img width="70" height="55" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_2.JPG"/><br/>
 <img width="140" height="140" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_3.JPG"/><br/>
@@ -204,9 +205,9 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 ********************
 ### Further Developments
 - _More Email Contents:_ The current tool can only send an email about one stock, in the future it should be able send emails on a group of stocks at the same time.
-- _Add Warning Feature:_ When the index exceeds threshold, the tool will only make predictions in regular daily mail. In the future, the tool can send an email as soon as it detects that the prediction index exceeds the threshold.
-- _Solve Time complexity:_ Since the news data are very large, we didn't save it. Everytime users call a different method, the functions have to read all the news from all the websites again. However, if we want to solve the problem of time complexity, the memory usage of the computer will be very large, but Python has no memory management, so the conflict will be very large, unfortunately, we still have difficulty solving it.
+- _Solve Time Complexity:_ Since the news data are very large, we didn't save it. Everytime users call a different method, the functions have to read all the news from all the websites again. However, if we want to solve the problem of time complexity, the memory usage of the computer will be very large, but Python has no memory management, so the conflict will be very large, unfortunately, we still have difficulty solving it.
 - _Improve UI_: Our UI could be more user friendly. In the future users will have better experience when using our tool. 
+- _Add More Features:_ When the index exceeds threshold, the tool will only make predictions in regular daily mail. In the future, the tool should be able to send an email as soon as it detects that the prediction index exceeds the threshold.
 ********************
 ### Group Members
 _All from Section 001_
