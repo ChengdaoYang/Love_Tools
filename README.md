@@ -201,7 +201,7 @@ Below is a sample of the email sent.<br/>
 <img width="200" height="200" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_1.JPG"/><br/>
 <img width="70" height="55" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_2.JPG"/><br/>
 <img width="140" height="140" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_3.JPG"/><br/>
-
+<img width="140" height="140" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/ui.jpeg"/><br/>
 ********************
 ### Further Developments
 - _More Email Contents:_ The current tool can only send an email about one stock, in the future it should be able send emails on a group of stocks at the same time.
