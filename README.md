@@ -13,12 +13,14 @@ Welcome to Love_Tools’s Team project :blush:
 
 ### What is it
 Lovely_Tools is the best friend of financial analysts. 
-It summaries news, predicts stocks, tracks stock markets, and sends emails and notifications. <br/>
+It reads new on Internet (_such as Bloomberg, CNN, Yahoo Finance, Nasdaq and so on_), summaries news, predicts stocks, tracks stock markets, and sends emails and notifications. 
+<br/>
 (A secret: we can see when users run it.)
 ***********
 ### Main Feature
-* _News Summary:_ get the summary from history news
-* _Stock Monitor:_ analysis stock news and send emails on  regular time (1 hour, 10 minutes,2 days)
+* _Read News:_ get the news from 7 major financial websites
+* _News Summary:_ summary history news from the 7 major websites
+* _Stock Monitor:_ analysis stock news and send emails on regular time (can be 1 hour, 10 minutes, 2 days and so on)
 * _Stock Prediction:_ predict stock trend 
 * _Send Email:_ send an email with stock analysis data and picture
 * _Backtest:_ test if the history news shows the same trend as the real stock data
@@ -27,10 +29,11 @@ It summaries news, predicts stocks, tracks stock markets, and sends emails and n
 ##### Requirements
 Lovely_Tools relys on requests, bs4, selenium, ntlk, collections, random, matplotlib, time, datetime, 
 smtplib, email. Thanks them XD. <br/>
-see all the packages on _module.txt_
+see details on _module.txt_ _requirement.txt_
+
 *************
 ### How to operate it
-Analysts can create Company objects with Lovely_Tools, base on company's name, if the company is listed on stock markets.
+Analysts can create Company objects with Lovely_Tools, based on company's name, if the company is listed on stock markets.
 Then they can simply call its method and attributes.<br/>
 Fistly, create an instance and enter your email address:
 ``` {.sourceCode .python}
@@ -93,7 +96,7 @@ Show the daily price in dataframe.
 >>> c.price(day=30, plot=True)
 ```
 - **news**(_day=7, out_put=False_)<br/>
-Get all news of the stocks during a specific period.
+Get all news of the stocks from major financial websites during a specific period.
 <table>
 <tr>
     <td rowspan="4">Parameters</td>
@@ -189,7 +192,7 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 
 ``` {.sourceCode .python}
 >>> c.backtest(save_plot=True)
-...save a picture to Apple_backtest.png...
+...saving a picture to Apple_backtest.png...
 ```
 *****************
 ### Sample
@@ -200,14 +203,14 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 
 ********************
 ### Further Developments
-- The current tool can only send an email to one person about one stock, and it can send emails to a group of people about  a group of stocks at the same time.
-- Our tool mines texts from the past few days and gets a prediction of future stock prices. When the index exceeds threshold, the tool will only make predictions in regular daily mail. In the future, the tool can send an email as soon as it detects that the prediction index exceeds the threshold.
-- If we want to solve the problem of time complexity, the memory usage of the computer will be very large, but Python has no memory management, so the conflict will be very large, unfortunately, we still have difficulty solving it.
-- Our tool doesn't have a UI yet. Users will have no user experience when using our tool. This is also an important direction for us to improve our tool in the future.
+- _More Email Contents:_ The current tool can only send an email about one stock, in the future it should be able send emails on a group of stocks at the same time.
+- _Add Warning Feature:_ When the index exceeds threshold, the tool will only make predictions in regular daily mail. In the future, the tool can send an email as soon as it detects that the prediction index exceeds the threshold.
+- _Solve Time complexity:_ Since the news data are very large, we didn't save it. Everytime users call a different method, the functions have to read all the news from all the websites again. However, if we want to solve the problem of time complexity, the memory usage of the computer will be very large, but Python has no memory management, so the conflict will be very large, unfortunately, we still have difficulty solving it.
+- _Improve UI_: Our UI could be more user friendly. In the future users will have better experience when using our tool. 
 ********************
 ### Group Members
-All from Section 001
-- Chengdao Yang
+_All from Section 001_
+- Chengdao Yang 
 - Wansi Xie
 - Manchun Sun
 - Xiangdong Duan
