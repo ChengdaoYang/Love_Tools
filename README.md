@@ -198,7 +198,7 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 *****************
 ### Sample
 #### email sample
-<img width="900" height="400" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_head.jpg"/><br/>
+<img width="900" height="550" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_head.jpg"/><br/>
 <img width="200" height="120" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_2.JPG"/><br/>
 <img width="350" height="250" src="https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_3.JPG"/><br/>
 #### user interface sample
