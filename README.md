@@ -1,12 +1,13 @@
 Welcome to Love_Tools’s Team project :blush:
 ===================================
-![Our Team](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/Team_Pic.png "Our Team")
+![Our Team](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/Team_Pic.png "Our Team")
 ===================================
 ## Lovely_Tools Repository
 * [What is it](#What-is-it)
 * [Main Feature](#Main-Feature)
 * [Installation](#Installation)
 * [How to operate it](#How-to-operate-it)
+* [Sample](#Sample)
 * [Further Developments](#Further-Developments)
 * [Group Members](#Group-Members)
 
@@ -191,6 +192,13 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 ...save a picture to Apple_backtest.png...
 ```
 *****************
+### Sample
+
+![Our Email1](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_1.JPG)
+![Our Email1](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_2.JPG){:height="50%" width="50%"}
+![Our Email1](https://raw.githubusercontent.com/ChengdaoYang/Love_Tools/master/image/email_3.JPG)
+
+********************
 ### Further Developments
 - The current tool can only send an email to one person about one stock, and it can send emails to a group of people about  a group of stocks at the same time.
 - Our tool mines texts from the past few days and gets a prediction of future stock prices. When the index exceeds threshold, the tool will only make predictions in regular daily mail. In the future, the tool can send an email as soon as it detects that the prediction index exceeds the threshold.
@@ -198,9 +206,9 @@ Save a backtest plot to relative environment, the name of which is *{Company_nam
 - Our tool doesn't have a UI yet. Users will have no user experience when using our tool. This is also an important direction for us to improve our tool in the future.
 ********************
 ### Group Members
+All from Section 001
 - Chengdao Yang
 - Wansi Xie
 - Manchun Sun
 - Xiangdong Duan
 ****************
-see example.py for detail
